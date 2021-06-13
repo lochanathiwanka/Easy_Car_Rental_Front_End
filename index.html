@@ -8,6 +8,7 @@
     <title>Easy Car Rental</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -22,7 +23,7 @@
             <li><a href="#help">Help</a></li>
         </ul>
         <ul class="menu2">
-            <li><a href="#sign-in">Sign In</a></li>
+            <li><a href="#login">Sign In</a></li>
             <li><a href="#register">Register</a></li>
             <li><a href="#help">Help</a></li>
         </ul>
@@ -35,6 +36,54 @@
 <main>
     <section class="home" id="home">
         <div class="blend"></div>
+    </section>
+    <section class="login" id="login">
+        <h1>Sign In to<br>Recharge Direct</h1>
+        <p>If you don't have an account<br>You can<span id="btnRegister">Register here!</span></p>
+        <div class="image1"></div>
+        <div class="image2"></div>
+        <form>
+            <div class="email-container container-fluid">
+                <label for="txtEmail"></label>
+                <input id="txtEmail" placeholder="Enter email or phone number" type="text">
+                <span id="email-validation"></span>
+            </div>
+            <div class="password-container container-fluid">
+                <label for="password"></label>
+                <i class="far fa-eye-slash" id="password-logo"></i>
+                <input id="password" placeholder="Password" type="password">
+                <span id="password-validation"></span>
+            </div>
+            <a href="#">Recovery password</a>
+            <button type="button">Sign In</button>
+        </form>
+        <div class="registration-popup" id="registration-popup">
+            <div class="popup-container" id="popup-container">
+                <div class="right-side">
+                    <h2>Create Account</h2>
+                    <span>as</span>
+                    <div class="reg-as-customer-container">
+                        <button id="btn-reg-as-customer"><i class="fas fa-street-view"></i></button>
+                        <h3>Customer</h3>
+                    </div>
+                    <div class="reg-as-driver-container">
+                        <button id="btn-reg-as-driver"><i class="fas fa-biking"></i></button>
+                        <h3>Driver</h3>
+                    </div>
+                    <section class="registration-form-container" id="registration-form-container">
+                    </section>
+                    <button id="btn-close-registration-view"><i class="far fa-times-circle"></i></button>
+                </div>
+                <div class="left-side">
+                    <h2>Welcome Back!</h2>
+                    <p>To keep connected with us please<br>login with your personal info</p>
+                    <div class="circle"></div>
+                    <div class="rectangle"></div>
+                    <div class="square"></div>
+                    <div class="tangle"></div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 <footer></footer>
