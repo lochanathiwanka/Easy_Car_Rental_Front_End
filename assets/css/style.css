@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #F8F8F8;
+}
+
+
+/*Nav Bar*/
+header > nav {
+    position: fixed;
+    width: 100vw;
+    height: 50px;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+header > nav > .logo-container {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 20px;
+}
+
+header > nav > .logo-container > h2 {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+header > nav > .logo-container > div {
+    position: absolute;
+    width: 35px;
+    height: 100%;
+    top: 0;
+    right: 0;
+}
+
+header > nav > ul {
+    position: absolute;
+    display: flex;
+    font-size: 16px;
+    column-gap: 50px;
+    list-style: none;
+}
+
+header > nav > .menu1 {
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+header > nav > .menu2 {
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
+
+header > nav > ul > li > a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+header > nav > ul > li > a:hover {
+    color: #FFA500;
+    transition: all 0.3s ease;
+}
+
+header > nav > .profile-container {
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    top: 50%;
+    left: 94%;
+    transform: translate(-50%, -50%);
+}
+
+header > nav > .profile-container > .add-to-cart {
+    position: absolute;
+    background: url("../icons/icon-cart-white.png") no-repeat center;
+    background-size: cover;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transition: all 0.3s ease;
+}
+
+header > nav > .profile-container > .add-to-cart:hover {
+    background: url("../icons/icon-cart-black.png") no-repeat center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+header > nav > .profile-container > .profile {
+    position: absolute;
+    background: url("../icons/icon-profile-white.png") no-repeat center;
+    background-size: cover;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transition: all 0.3s ease;
+}
+
+header > nav > .profile-container > .profile:hover {
+    transform: scale(1.1);
+    background: url("../icons/icon-profile-black.png") no-repeat center;
+    transition: all 0.3s ease;
+}
+
+/*--------------------------------------------------*/
+
+/*Home styling*/
+.home {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+}
+
+/*.home > .image-container {
+    position: absolute;
+    width: 400%;
+    height: 100%;
+    animation: home-slider 20s ease-in-out infinite;
+    -webkit-animation-name: home-slider;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.home > .image-container > .photo1 {
+    position: absolute;
+    left: 0;
+    !*background: url("../images/car1.jpg") no-repeat center;*!
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc(100% / 4);
+    height: 100%;
+}
+
+.home > .image-container > .photo2 {
+    position: absolute;
+    left: calc(100% / 4 * 1);
+    !*background: url("../images/car2.jpg") no-repeat center;*!
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc(100% / 4);
+    height: 100%;
+}
+
+.home > .image-container > .photo3 {
+    position: absolute;
+    left: calc(100% / 4 * 2);
+    !*background: url("../images/car3.jpg") no-repeat center;*!
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc(100% / 4);
+    height: 100%;
+}
+
+.home > .image-container > .photo4 {
+    position: absolute;
+    left: calc(100% / 4 * 3);
+    !*background: url("../images/car4.jpg") no-repeat center;*!
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc(100% / 4);
+    height: 100%;
+}*/
+
+.home > .blend {
+    position: absolute;
+    background-color: #303045;
+    width: 400%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+
+/*@keyframes home-slider {
+    0% {
+        !*transform: translateX(0);*!
+        left: 0;
+    }
+    25% {
+        !*transform: translateX(-100vw);*!
+        left: -100vw;
+    }
+    50% {
+        !*transform: translateX(-100vw);*!
+        left: -200vw;
+    }
+    75% {
+        !*transform: translateX(-100vw);*!
+        left: -300vw;
+    }
+    95% {
+        !*transform: translateX(-100vw);*!
+        left: 0;
+    }
+    100% {
+        !*transform: translateX(0);*!
+        left: initial;
+    }
+}*/
