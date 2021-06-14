@@ -17,7 +17,6 @@ let images = [
     "https://i.ibb.co/Ph5K8zS/car4.jpg"
 ];
 let i = 0;
-
 function nextBackground() {
     $("#home").css("background-image", "url(" + images[i] + ")");
     i = i + 1;
@@ -41,8 +40,15 @@ $('#password-logo').click(function () {
     }
 });
 
-//registration view enable and disable
-$('#btnRegister').click(function () {
+
+//nav-bar's Sign In list item click
+$('#li-sign-in').click(function () {
+    $('#registration-popup').css("display", "none");
+});
+
+
+//set registration view
+function registrationViewSetEnable() {
     $('#registration-popup').css("display", "flex");
     $.ajax({
         method: 'GET',
@@ -53,7 +59,17 @@ $('#btnRegister').click(function () {
             $('#registration-form-container').html(data);
         }
     });
+}
+
+//nav-bar's Register list item click
+$('#li-register').click(function () {
+    registrationViewSetEnable();
 });
+//registration view enable
+$('#btnRegister').click(function () {
+    registrationViewSetEnable();
+});
+//registration view close
 $('#btn-close-registration-view').click(function () {
     $('#registration-popup').css("display", "none");
     $('#popup-container').css('height', '550px');

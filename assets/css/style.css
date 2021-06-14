@@ -152,6 +152,10 @@ header > nav > .profile-container > .profile:hover {
 
 /*--------------------------------------------------*/
 
+main {
+    position: relative;
+}
+
 /*Home styling*/
 .home {
     position: relative;
@@ -685,5 +689,222 @@ header > nav > .profile-container > .profile:hover {
     top: 205px;
 }
 
+/*--------------------------------------------------------------------------------------*/
+
+/*Vehicles screen styling*/
+.vehicles {
+    width: 100%;
+    height: 100%;
+    background-color: #ececec;
+}
+
+.vehicles > .parent-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.vehicles > .parent-container > div {
+    position: relative;
+}
+
+/*title-container styling*/
+.vehicles > .parent-container > .title-container {
+    width: 11%;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.vehicles > .parent-container > .title-container > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+/*general-cars-title-container styling*/
+.vehicles > .parent-container > .general-cars-title-container {
+    width: 11%;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.vehicles > .parent-container > .general-cars-title-container > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+/*general-cars-category styling*/
+.vehicles > .parent-container > .general-cars-category {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+/*premium-cars-title-container*/
+.vehicles > .parent-container > .premium-cars-title-container {
+    width: 12%;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.vehicles > .parent-container > .premium-cars-title-container > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+/*premium-cars-category styling*/
+.vehicles > .parent-container > .premium-cars-category {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+}
+
+/*luxury-cars-title-container*/
+.vehicles > .parent-container > .luxury-cars-title-container {
+    width: 11%;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.vehicles > .parent-container > .luxury-cars-title-container > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+/*luxury-cars-category styling*/
+.vehicles > .parent-container > .luxury-cars-category {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+}
+
+/*general, premium, luxury category childs styling*/
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:nth-child(1) > div {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background: url("../bmwi8.jpg") no-repeat center;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    /*left: 50%;
+    transform: translateX(-50%);*/
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:nth-child(2) > div {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background: url("../car-3.jpg") no-repeat center;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    /*left: 50%;
+    transform: translateX(-50%);*/
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:nth-child(3) > div {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background: url("../car-4.jpg") no-repeat center;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    /*left: 50%;
+    transform: translateX(-50%);*/
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:nth-child(4) > div {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background: url("../car-5.jpg") no-repeat center;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    /*left: 50%;
+    transform: translateX(-50%);*/
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:nth-child(5) > div {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background: url("../bmwi8.jpg") no-repeat center;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    /*left: 50%;
+    transform: translateX(-50%);*/
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > p {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    width: 90%;
+    top: 62%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > button {
+    position: absolute;
+    font-size: 18px;
+    border: none;
+    color: #43B14B;
+    background: none;
+    width: 30px;
+    height: 30px;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 
