@@ -89,7 +89,7 @@ header > nav.sticky > ul > li > a {
 }
 
 header > nav > ul > li > a:hover {
-    color: #FFA500;
+    color: #003D7A;
     transition: all 0.3s ease;
 }
 
