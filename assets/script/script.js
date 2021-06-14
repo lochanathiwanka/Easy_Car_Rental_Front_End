@@ -16,12 +16,12 @@ let images = [
     "https://i.ibb.co/GM5RHcS/car3.jpg",
     "https://i.ibb.co/Ph5K8zS/car4.jpg"
 ];
-let i = 0;
+let x = 0;
 function nextBackground() {
-    $("#home").css("background-image", "url(" + images[i] + ")");
-    i = i + 1;
-    if (i === images.length) {
-        i = 0;
+    $("#home").css("background-image", "url(" + images[x] + ")");
+    x = x + 1;
+    if (x === images.length) {
+        x = 0;
     }
 }
 
@@ -90,3 +90,51 @@ $('#btn-reg-as-customer').click(function () {
         }
     });
 });
+
+
+//Vehicles section
+//general vehicles loading
+let gn_car_images = ["./assets/bmwi8.jpg", "./assets/car-3.jpg", "./assets/car-4.jpg", "./assets/car-5.jpg", "./assets/bmwi8.jpg"];
+$('#general-cars-category').empty();
+for (let i = 0; i < 5; i++) {
+    $('#general-cars-category').append(
+        `
+        <div id="general-car${i + 1}">
+            <div class="image" id="gn-image${i + 1}"></div>
+            <p class="para" id="gn-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
+        </div>
+        `
+    );
+    $('#gn-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
+}
+
+//premium vehicles loading
+$('#premium-cars-category').empty();
+for (let i = 0; i < 4; i++) {
+    $('#premium-cars-category').append(
+        `
+        <div id="premium-car${i + 1}">
+            <div class="image" id="pr-image${i + 1}"></div>
+            <p class="para" id="pr-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <button class="btn-add-to-cart" id="pr-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
+        </div>
+        `
+    );
+    $('#pr-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
+}
+
+//luxury vehicles loading
+$('#luxury-cars-category').empty();
+for (let i = 0; i < 3; i++) {
+    $('#luxury-cars-category').append(
+        `
+        <div id="luxury-car${i + 1}">
+            <div class="image" id="lx-image${i + 1}"></div>
+            <p class="para" id="lx-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <button class="btn-add-to-cart" id="lx-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
+        </div>
+        `
+    );
+    $('#lx-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
+}
