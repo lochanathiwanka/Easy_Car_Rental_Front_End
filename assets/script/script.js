@@ -101,7 +101,7 @@ for (let i = 0; i < 5; i++) {
         `
         <div id="general-car${i + 1}">
             <div class="image" id="gn-image${i + 1}"></div>
-            <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+         <!--    <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
             <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
             <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
             <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
@@ -121,7 +121,7 @@ for (let i = 0; i < 5; i++) {
             <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
             <span class="count" id="gn-count${i + 1}">0</span>
             <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-            <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
+            <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i class="fas fa-cart-plus"></i></button> -->
         </div>
         `
     );
@@ -135,7 +135,7 @@ for (let i = 0; i < 4; i++) {
         `
         <div id="premium-car${i + 1}">
             <div class="image" id="pr-image${i + 1}"></div>
-            <p class="brand" id="pr-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+         <!--   <p class="brand" id="pr-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
             <p class="category-id" id="pr-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
             <p class="transmission-type" id="pr-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
             <p class="fuel-type" id="pr-fuel-type${i + 1}">Fuel: Diesel</p>
@@ -155,7 +155,7 @@ for (let i = 0; i < 4; i++) {
             <button class="btn-increment" id="pr-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
             <span class="count" id="pr-count${i + 1}">0</span>
             <button class="btn-decrement" id="pr-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-            <button class="btn-add-to-cart" id="pr-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
+            <button class="btn-add-to-cart" id="pr-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i class="fas fa-cart-plus"></i></button> -->
         </div>
         `
     );
@@ -169,7 +169,7 @@ for (let i = 0; i < 3; i++) {
         `
         <div id="luxury-car${i + 1}">
             <div class="image" id="lx-image${i + 1}"></div>
-            <p class="brand" id="lx-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+         <!--    <p class="brand" id="lx-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
             <p class="category-id" id="lx-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
             <p class="transmission-type" id="lx-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
             <p class="fuel-type" id="lx-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
@@ -189,7 +189,7 @@ for (let i = 0; i < 3; i++) {
             <button class="btn-increment" id="lx-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
             <span class="count" id="lx-count${i + 1}">0</span>
             <button class="btn-decrement" id="lx-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-            <button class="btn-add-to-cart" id="lx-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
+            <button class="btn-add-to-cart" id="lx-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i class="fas fa-cart-plus"></i></button> -->
         </div>
         `
     );
@@ -197,7 +197,7 @@ for (let i = 0; i < 3; i++) {
 }
 
 
-/*Notification, Cart, Profile popup views open & close*/
+//Notification, Cart, Profile popup views open & close
 //close popup windows when clicking other areas
 $(function () {
     $('main').click(function () {
@@ -238,15 +238,45 @@ $("#profile-popup").click(function (e) {
 });
 
 
-/*remove item form cart*/
+//remove item form cart
 function removeItemFromCart(id) {
     let parent_item = $(`#${id}`).closest('div').attr('id');
     $(`#${parent_item}`).remove();
 }
 
-/*remove notification*/
+//remove notification
 function removeNotification(id) {
     let parent_item = $(`#${id}`).closest('div').attr('id');
     $(`#${parent_item}`).remove();
 }
+
+
+//Add item to cart
+function addItemToCart(id) {
+    let isUserLogged = checkIsUserLogged();
+    if (isUserLogged) {
+        //get parent id
+        let parent = $(`#${id}`).closest('div').attr('id');
+        let brand = $(`#${parent}`).children('p').eq(0).text();
+        let ct_id = $(`#${parent}`).children('p').eq(1).text();
+        let qty = $(`#${parent}`).children('span').eq(1).text();
+        let rental_fee;
+        let ldw_fee;
+        alert(child_value);
+    } else {
+        //jump to Login page
+        document.getElementById("jump_to_this_location").scrollIntoView({behavior: 'auto'});
+    }
+}
+
+//check if the user is logged in or not
+function checkIsUserLogged() {
+    let user_name = $('#user-name').text();
+    if (user_name.trim().length > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 

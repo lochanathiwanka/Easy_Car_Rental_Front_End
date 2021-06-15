@@ -181,10 +181,10 @@ header > nav > .profile-container > .profile:hover {
 /*--------------------------------------------------*/
 
 
-/*Profile popup styling*/
+/*Notification popup styling*/
 header > .notification-popup {
     position: fixed;
-    display: flex;
+    display: none;
     z-index: 1;
     width: 400px;
     min-height: 80px;
@@ -1050,389 +1050,378 @@ main {
     background-color: #ececec;
 }
 
-.vehicles > .parent-container {
+.parent-container {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    left: 0;
-    right: 0;
-    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
 }
 
-.vehicles > .parent-container > div {
+.parent-container > div {
     position: relative;
 }
 
 /*title-container styling*/
-.vehicles > .parent-container > .title-container {
-    width: 11%;
-    top: 20px;
+.title-container {
     left: 0;
     right: 0;
     margin: auto;
+    width: 100%;
+    grid-column: 1/3;
 }
 
-.vehicles > .parent-container > .title-container > h1 {
+.title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 40px;
     font-weight: 600;
 }
 
 /*general-cars-title-container styling*/
-.vehicles > .parent-container > .general-cars-title-container {
-    width: 11%;
-    top: 20px;
+.general-cars-title-container {
     left: 0;
     right: 0;
     margin: auto;
+    width: 100%;
+    grid-column: 1/3;
 }
-.vehicles > .parent-container > .general-cars-title-container > h1 {
+
+.general-cars-title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
     font-weight: 500;
 }
-
 /*general-cars-category styling*/
-.vehicles > .parent-container > .general-cars-category {
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 60%;
+.general-cars-category {
+    left: 20px;
+    /*right: 0;
+    margin: auto;*/
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 30px;
     transition: all 0.3s ease-in-out;
 }
 
+.general-car-details-container {
+    height: 530px;
+    background-color: #f7f7f7;
+    box-shadow: 6px 10px 8px 2px #c1c1c1;
+}
+
 /*premium-cars-title-container*/
-.vehicles > .parent-container > .premium-cars-title-container {
-    width: 12%;
-    top: 20px;
+.premium-cars-title-container {
     left: 0;
     right: 0;
     margin: auto;
+    width: 100%;
+    grid-column: 1/3;
 }
-.vehicles > .parent-container > .premium-cars-title-container > h1 {
+
+.premium-cars-title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
     font-weight: 500;
 }
-
 /*premium-cars-category styling*/
-.vehicles > .parent-container > .premium-cars-category {
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 60%;
+.premium-cars-category {
+    left: 20px;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 30px;
+}
+
+.premium-car-details-container {
+    height: 530px;
+    background-color: #f7f7f7;
+    box-shadow: 6px 10px 8px 2px #c1c1c1;
 }
 
 /*luxury-cars-title-container*/
-.vehicles > .parent-container > .luxury-cars-title-container {
-    width: 11%;
-    top: 20px;
+.luxury-cars-title-container {
     left: 0;
     right: 0;
     margin: auto;
+    width: 100%;
+    grid-column: 1/3;
 }
-.vehicles > .parent-container > .luxury-cars-title-container > h1 {
+
+.luxury-cars-title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
     font-weight: 500;
 }
-
 /*luxury-cars-category styling*/
-.vehicles > .parent-container > .luxury-cars-category {
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 60%;
+.luxury-cars-category {
+    left: 20px;
+    /*right: 0;
+    margin: auto;*/
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 30px;
 }
 
+.luxury-car-details-container {
+    height: 530px;
+    background-color: #f7f7f7;
+    box-shadow: 6px 10px 8px 2px #c1c1c1;
+}
+
+.footer-container {
+    grid-column: 1/3;
+}
+
 /*general, premium, luxury category childs styling*/
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div {
+.general-cars-category > div {
     position: relative;
     width: 100%;
     height: 250px;
     border-radius: 10px;
     background-color: #fdfdfd;
     box-shadow: 6px 10px 8px 2px #cccccc;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.general-cars-category > div:hover {
+    transform: scale(1.1);
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-out;
+}
+
+.premium-cars-category > div {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.premium-cars-category > div:hover {
+    transform: scale(1.1);
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-out;
+}
+
+.luxury-cars-category > div {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.luxury-cars-category > div:hover {
+    transform: scale(1.1);
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-out;
+}
+
+.footer-container > div {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    box-shadow: 6px 10px 8px 2px #cccccc;
+    transition: all 0.3s ease-out;
     cursor: crosshair;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover {
-    width: 120%;
-    height: 500px;
-    z-index: 1;
-    transform: scale(1.1);
-    box-shadow: 2px 2px 8px 2px #cccccc;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .image {
+.image {
     position: absolute;
     width: 100%;
-    height: 150px;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 10px 10px;
     transition: all 0.3s ease-in-out;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .image:before {
+.image:before {
     position: absolute;
     content: "";
     width: 100%;
     height: 100%;
     background-color: #303045;
     opacity: 0.3;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 10px 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > p > span {
+p > span {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     padding-left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .brand {
+.car-image {
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    background-color: #18A558;
+    transition: all 0.3s ease-in-out;
+}
+
+.car-image:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #303045;
+    opacity: 0.3;
+}
+
+.brand {
     position: absolute;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    width: 90%;
-    top: 62%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+    top: 5px;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .brand {
-    top: 30%;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .category-id {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .category-id {
+.category-id {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
-    top: 40%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .transmission-type {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .transmission-type {
-    position: absolute;
-    display: flex;
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    width: 90%;
-    top: 45%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .fuel-type {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .fuel-type {
-    position: absolute;
-    display: flex;
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    width: 90%;
     top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .no-of-passenger {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .no-of-passenger {
+.transmission-type {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
     top: 55%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .daily-rate {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .daily-rate {
+.fuel-type {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
     top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .monthly-rate {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .monthly-rate {
+.no-of-passenger {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
     top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .free-mileage-price {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .free-mileage-price {
+.daily-rate {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
     top: 70%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .extra-km-price {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .extra-km-price {
+.monthly-rate {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
     top: 75%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .color {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color {
+.ldw-fee {
     position: absolute;
-    display: flex;
-    gap: 20px;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    width: 90%;
     top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color > span:not(:nth-child(1)) {
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color > .white {
-    color: #dcdcdc;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color > .black {
-    color: black;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color > .red {
-    color: #D01110;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color > .blue {
-    color: #04247C;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .color > span:not(:nth-child(1)):hover {
-    transform: scale(1.2);
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .left-cars {
-    display: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div:hover > .left-cars {
+.free-mileage-price {
     position: absolute;
-    display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    color: #D01110;
-    width: 90%;
-    top: 87%;
-    left: 35%;
-    transition: all 0.3s ease-in-out;
+    top: 85%;
+    left: 10px;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .btn-increment {
+.extra-km-price {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    top: 90%;
+    left: 10px;
+}
+
+.color {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    top: 50%;
+    left: 40%;
+}
+
+.pickup-date-container {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    top: 60%;
+    left: 40%;
+}
+
+.return-date-container {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    top: 60%;
+    left: 70%;
+}
+
+.driver-check-container {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    top: 75%;
+    left: 40%;
+}
+
+.left-cars {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    top: 40%;
+    right: 0;
+}
+
+.btn-increment {
     position: absolute;
     font-size: 18px;
     border: none;
@@ -1440,13 +1429,12 @@ main {
     background: none;
     width: 30px;
     height: 30px;
-    bottom: 4px;
-    left: 20%;
-    transform: translateX(-50%);
+    top: 90%;
+    left: 40%;
     transition: all 0.3s ease-in-out;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .count {
+.count {
     position: absolute;
     font-size: 18px;
     color: #686767;
@@ -1454,13 +1442,12 @@ main {
     background: none;
     width: 30px;
     height: 30px;
-    bottom: 4px;
-    left: 35%;
-    transform: translateX(-50%);
+    top: 90%;
+    left: 45%;
     transition: all 0.3s ease-in-out;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .btn-decrement {
+.btn-decrement {
     position: absolute;
     font-size: 18px;
     border: none;
@@ -1468,13 +1455,12 @@ main {
     background: none;
     width: 30px;
     height: 30px;
-    bottom: 4px;
-    left: 41%;
-    transform: translateX(-50%);
+    top: 90%;
+    left: 48%;
     transition: all 0.3s ease-in-out;
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .btn-add-to-cart {
+.btn-add-to-cart {
     position: absolute;
     font-size: 18px;
     border: none;
@@ -1482,8 +1468,10 @@ main {
     background: none;
     width: 30px;
     height: 30px;
-    bottom: 4px;
-    left: 70%;
-    transform: translateX(-50%);
+    top: 90%;
+    left: 55%;
     transition: all 0.3s ease-in-out;
 }
+
+
+/*------------------------------------------------*/

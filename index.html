@@ -118,9 +118,9 @@
         <div class="profile-popup-container" id="profile-popup-container">
             <div class="content">
                 <div>
-                    <p><span>Lochana Thiwanka</span></p>
-                    <p><span>lochanathiwanka62@gmail.com</span></p>
-                    <p><span>C001</span></p>
+                    <p><span class="user-name" id="user-name">Lochana Thiwanka</span></p>
+                    <p><span class="user-email" id="user-email">lochanathiwanka62@gmail.com</span></p>
+                    <p><span class="user-id" id="user-id">C001</span></p>
                 </div>
             </div>
             <div class="footer"></div>
@@ -211,6 +211,46 @@
                     <button class="btn-add-to-cart" id="gn-btn-add-to-cart5"><i class="fas fa-cart-plus"></i></button>
                 </div>-->
             </div>
+            <div class="general-car-details-container" id="general-car-details-container">
+                <div class="car-image"></div>
+                <p class="brand" id="gn-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
+                <p class="category-id" id="gn-category-id">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="transmission-type" id="gn-transmission-type">Transmission:<span>Auto</span></p>
+                <p class="fuel-type" id="gn-fuel-type">Fuel:<span>Diesel</span></p>
+                <p class="no-of-passenger" id="gn-no-of-passenger">No.Passenger:<span>5</span></p>
+                <p class="daily-rate" id="gn-daily-rate">Daily Rate:<span>5000.00</span></p>
+                <p class="monthly-rate" id="gn-monthly-rate">Monthly Rate:<span>5000.00</span></p>
+                <p class="ldw-fee" id="gn-ldw-fee${i + 1}">LDW FEE:<span>10000.00</span></p>
+                <p class="free-mileage-price" id="gn-free-mileage-price">Free Mileage:<span>5KM</span></p>
+                <p class="extra-km-price" id="gn-extra-km-price">Extra KM:<span>1000.00 per 1KM</span></p>
+                <div class="color" id="gn-color">
+                    <span>Color:</span>
+                    <span class="white" id="gn-white}"><i class="fas fa-circle"></i></span>
+                    <span class="black" id="gn-black"><i class="fas fa-circle"></i></span>
+                    <span class="red" id="gn-red"><i class="fas fa-circle"></i></span>
+                    <span class="blue" id="gn-blue"><i class="fas fa-circle"></i></span>
+                </div>
+                <span class="left-cars" id="gn-left-cars">20 Left</span>
+                <div class="pickup-date-container mb-3">
+                    <label class="form-label" for="gn-pickup-date">Pickup Date</label>
+                    <input class="pickup-date form-control form-control-sm" id="gn-pickup-date" type="date">
+                </div>
+                <div class="return-date-container mb-3">
+                    <label class="form-label" for="gn-return-date">Return Date</label>
+                    <input class="pickup-date form-control form-control-sm" id="gn-return-date" type="date">
+                </div>
+                <div class="driver-check-container form-check">
+                    <input class="form-check-input" id="gn-driver" name="driver" type="checkbox" value="">
+                    <label class="form-check-label" for="gn-driver">
+                        Driver
+                    </label>
+                </div>
+                <button class="btn-increment" id="gn-btn-increment"><i class="far fa-plus-square"></i></button>
+                <span class="count" id="gn-count">0</span>
+                <button class="btn-decrement" id="gn-btn-decrement"><i class="far fa-minus-square"></i></button>
+                <button class="btn-add-to-cart" id="gn-btn-add-to-cart" onclick="addItemToCart(this.id)"><i
+                        class="fas fa-cart-plus"></i></button>
+            </div>
 
             <div class="premium-cars-title-container" id="premium-cars-title-container"><h1>Premium Cars</h1></div>
             <div class="premium-cars-category" id="premium-cars-category">
@@ -235,6 +275,31 @@
                     <button class="btn-add-to-cart" id="pr-btn-add-to-cart4"><i class="fas fa-cart-plus"></i></button>
                 </div>-->
             </div>
+            <div class="premium-car-details-container" id="premium-car-details-container">
+                <div class="car-image"></div>
+                <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+                <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
+                <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
+                <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
+                <p class="daily-rate" id="gn-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
+                <p class="monthly-rate" id="gn-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
+                <p class="free-mileage-price" id="gn-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
+                <p class="extra-km-price" id="gn-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
+                <div class="color" id="gn-color${i + 1}">
+                    <span>Color:</span>
+                    <span class="white" id="gn-white${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="black" id="gn-black${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="red" id="gn-red${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="blue" id="gn-blue${i + 1}"><i class="fas fa-circle"></i></span>
+                </div>
+                <span class="left-cars" id="gn-left-cars${i + 1}">20 Left</span>
+                <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+                <span class="count" id="gn-count${i + 1}">0</span>
+                <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
+                <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i
+                        class="fas fa-cart-plus"></i></button>
+            </div>
 
             <div class="luxury-cars-title-container" id="luxury-cars-title-container"><h1>Luxury Cars</h1></div>
             <div class="luxury-cars-category" id="luxury-cars-category">
@@ -253,6 +318,31 @@
                     <p class="para" id="lx-para3">Perodua Bezza Prime Sedan - Auto (2017)</p>
                     <button class="btn-add-to-cart" id="lx-btn-add-to-cart3"><i class="fas fa-cart-plus"></i></button>
                 </div>-->
+            </div>
+            <div class="luxury-car-details-container" id="luxury-car-details-container">
+                <div class="car-image"></div>
+                <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+                <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
+                <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
+                <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
+                <p class="daily-rate" id="gn-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
+                <p class="monthly-rate" id="gn-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
+                <p class="free-mileage-price" id="gn-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
+                <p class="extra-km-price" id="gn-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
+                <div class="color" id="gn-color${i + 1}">
+                    <span>Color:</span>
+                    <span class="white" id="gn-white${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="black" id="gn-black${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="red" id="gn-red${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="blue" id="gn-blue${i + 1}"><i class="fas fa-circle"></i></span>
+                </div>
+                <span class="left-cars" id="gn-left-cars${i + 1}">20 Left</span>
+                <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+                <span class="count" id="gn-count${i + 1}">0</span>
+                <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
+                <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i
+                        class="fas fa-cart-plus"></i></button>
             </div>
 
             <div class="footer-container" id="footer-container"></div>
