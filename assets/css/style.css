@@ -75,6 +75,32 @@ header > nav > .menu2 {
     transform: translate(-50%, -50%);
 }
 
+header > nav > .menu3 {
+    color: white;
+    font-size: 18px;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+}
+
+header > nav > ul > li {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+header > nav > ul > li:hover {
+    transition: all 0.3s ease-in-out;
+    color: #003D7A;
+}
+
+header > nav.sticky > .menu3 > li > i {
+    color: black;
+}
+
+header > nav.sticky > .menu3 > li > i:hover {
+    color: #FBFBFB;
+}
+
 header > nav > ul > li > a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
@@ -151,6 +177,105 @@ header > nav > .profile-container > .profile:hover {
 }
 
 /*--------------------------------------------------*/
+
+/*Cart popup styling*/
+header > .cart-popup {
+    position: fixed;
+    display: none;
+    z-index: 1;
+    width: 350px;
+    min-height: 80px;
+    right: 150px;
+    top: 55px;
+    border-radius: 4px;
+    background-color: #bfbebe;
+    transition: all 0.3s ease-in-out;
+}
+
+header > .cart-popup > .cart-popup-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+header > .cart-popup > .cart-popup-container > div {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+header > .cart-popup > .cart-popup-container > .content > div {
+    position: relative;
+    width: 95%;
+    height: 80px;
+    background-color: #dbdbdb;
+    left: 0;
+    right: 0;
+    top: 10px;
+    margin: auto;
+}
+
+/*------------------------------------------*/
+
+/*Profile popup styling*/
+header > .profile-popup {
+    position: fixed;
+    display: none;
+    z-index: 1;
+    width: 280px;
+    min-height: 80px;
+    right: 100px;
+    top: 55px;
+    border-radius: 4px;
+    background-color: #777779;
+}
+
+header > .profile-popup > .profile-popup-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+header > .profile-popup > .profile-popup-container > div {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+header > .profile-popup > .profile-popup-container > .content > div {
+    position: relative;
+    width: 95%;
+    height: 80px;
+    background-color: #dbdbdb;
+    left: 0;
+    right: 0;
+    top: 10px;
+    margin: auto;
+}
+
+/*------------------------------------------*/
 
 main {
     position: relative;
@@ -737,7 +862,6 @@ main {
     right: 0;
     margin: auto;
 }
-
 .vehicles > .parent-container > .general-cars-title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
@@ -765,7 +889,6 @@ main {
     right: 0;
     margin: auto;
 }
-
 .vehicles > .parent-container > .premium-cars-title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
@@ -792,7 +915,6 @@ main {
     right: 0;
     margin: auto;
 }
-
 .vehicles > .parent-container > .luxury-cars-title-container > h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
@@ -906,7 +1028,46 @@ main {
     transform: translateX(-50%);
 }
 
-.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > button {
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .btn-increment {
+    position: absolute;
+    font-size: 18px;
+    border: none;
+    color: #686767;
+    background: none;
+    width: 30px;
+    height: 30px;
+    bottom: 4px;
+    left: 20%;
+    transform: translateX(-50%);
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .count {
+    position: absolute;
+    font-size: 18px;
+    color: #686767;
+    border: none;
+    background: none;
+    width: 30px;
+    height: 30px;
+    bottom: 4px;
+    left: 35%;
+    transform: translateX(-50%);
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .btn-decrement {
+    position: absolute;
+    font-size: 18px;
+    border: none;
+    color: #686767;
+    background: none;
+    width: 30px;
+    height: 30px;
+    bottom: 4px;
+    left: 41%;
+    transform: translateX(-50%);
+}
+
+.vehicles > .parent-container > div:not(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(6)) > div > .btn-add-to-cart {
     position: absolute;
     font-size: 18px;
     border: none;
@@ -915,8 +1076,6 @@ main {
     width: 30px;
     height: 30px;
     bottom: 4px;
-    left: 50%;
+    left: 70%;
     transform: translateX(-50%);
 }
-
-

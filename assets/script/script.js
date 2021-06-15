@@ -102,6 +102,9 @@ for (let i = 0; i < 5; i++) {
         <div id="general-car${i + 1}">
             <div class="image" id="gn-image${i + 1}"></div>
             <p class="para" id="gn-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <button class="btn-increment" id="btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+            <span class="count" id="count${i + 1}">0</span>
+            <button class="btn-decrement" id="btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
             <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
         </div>
         `
@@ -117,6 +120,9 @@ for (let i = 0; i < 4; i++) {
         <div id="premium-car${i + 1}">
             <div class="image" id="pr-image${i + 1}"></div>
             <p class="para" id="pr-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <button class="btn-increment" id="btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+            <span class="count" id="count${i + 1}">0</span>
+            <button class="btn-decrement" id="btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
             <button class="btn-add-to-cart" id="pr-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
         </div>
         `
@@ -132,9 +138,26 @@ for (let i = 0; i < 3; i++) {
         <div id="luxury-car${i + 1}">
             <div class="image" id="lx-image${i + 1}"></div>
             <p class="para" id="lx-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <button class="btn-increment" id="btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+            <span class="count" id="count${i + 1}">0</span>
+            <button class="btn-decrement" id="btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
             <button class="btn-add-to-cart" id="lx-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
         </div>
         `
     );
     $('#lx-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
 }
+
+
+/*Cart popup view enable*/
+$('#add-to-cart').click(function () {
+    $('#cart-popup').css('display', 'flex');
+});
+$("#cart-popup").click(function (e) {
+    e.stopPropagation();
+});
+$(function () {
+    $('main').click(function () {
+        $('#cart-popup').css('display', 'none');
+    });
+});

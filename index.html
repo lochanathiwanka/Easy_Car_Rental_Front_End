@@ -27,11 +27,27 @@
             <li><a href="#login" id="li-sign-in">Sign In</a></li>
             <li><a href="#registration-popup" id="li-register">Register</a></li>
         </ul>
-        <div class="profile-container">
+        <!--<div class="profile-container">
             <div class="add-to-cart"></div>
             <div class="profile"></div>
-        </div>
+        </div>-->
+        <ul class="menu3">
+            <li id="add-to-cart"><i class="fas fa-shopping-cart"></i></li>
+            <li id="profile"><i class="fas fa-user-circle"></i></li>
+        </ul>
     </nav>
+    <div class="cart-popup" id="cart-popup">
+        <div class="cart-popup-container" id="cart-popup-container">
+            <div class="content"></div>
+            <div class="footer"></div>
+        </div>
+    </div>
+    <div class="profile-popup" id="profile-popup">
+        <div class="profile-popup-container" id="profile-popup-container">
+            <div class="content"></div>
+            <div class="footer"></div>
+        </div>
+    </div>
 </header>
 <main>
     <section class="home" id="home">
@@ -45,13 +61,13 @@
         <form>
             <div class="email-container container-fluid">
                 <label for="txtEmail"></label>
-                <input id="txtEmail" placeholder="Enter email or phone number" type="text">
+                <input id="txtEmail" placeholder="Enter email or phone number" required type="text">
                 <span id="email-validation"></span>
             </div>
             <div class="password-container container-fluid">
                 <label for="password"></label>
                 <i class="far fa-eye-slash" id="password-logo"></i>
-                <input id="password" placeholder="Password" type="password">
+                <input id="password" placeholder="Password" required type="password">
                 <span id="password-validation"></span>
             </div>
             <a href="#">Recovery password</a>
