@@ -101,10 +101,26 @@ for (let i = 0; i < 5; i++) {
         `
         <div id="general-car${i + 1}">
             <div class="image" id="gn-image${i + 1}"></div>
-            <p class="para" id="gn-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-            <button class="btn-increment" id="btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-            <span class="count" id="count${i + 1}">0</span>
-            <button class="btn-decrement" id="btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
+            <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+            <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
+            <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
+            <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
+            <p class="daily-rate" id="gn-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
+            <p class="monthly-rate" id="gn-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
+            <p class="free-mileage-price" id="gn-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
+            <p class="extra-km-price" id="gn-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
+            <div class="color" id="gn-color${i + 1}">
+                <span>Color:</span>
+                <span class="white" id="gn-white${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="black" id="gn-black${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="red" id="gn-red${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="blue" id="gn-blue${i + 1}"><i class="fas fa-circle"></i></span>
+            </div>
+            <span class="left-cars" id="gn-left-cars${i + 1}">20 Left</span>
+            <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+            <span class="count" id="gn-count${i + 1}">0</span>
+            <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
             <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
         </div>
         `
@@ -119,10 +135,26 @@ for (let i = 0; i < 4; i++) {
         `
         <div id="premium-car${i + 1}">
             <div class="image" id="pr-image${i + 1}"></div>
-            <p class="para" id="pr-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-            <button class="btn-increment" id="btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-            <span class="count" id="count${i + 1}">0</span>
-            <button class="btn-decrement" id="btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
+            <p class="brand" id="pr-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <p class="category-id" id="pr-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+            <p class="transmission-type" id="pr-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
+            <p class="fuel-type" id="pr-fuel-type${i + 1}">Fuel: Diesel</p>
+            <p class="no-of-passenger" id="pr-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
+            <p class="daily-rate" id="pr-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
+            <p class="monthly-rate" id="pr-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
+            <p class="free-mileage-price" id="pr-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
+            <p class="extra-km-price" id="pr-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
+            <div class="color" id="pr-color${i + 1}">
+                <span>Color:</span>
+                <span class="white" id="pr-white${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="black" id="pr-black${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="red" id="pr-red${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="blue" id="pr-blue${i + 1}"><i class="fas fa-circle"></i></span>
+            </div>
+            <span class="left-cars" id="pr-left-cars${i + 1}">20 Left</span>
+            <button class="btn-increment" id="pr-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+            <span class="count" id="pr-count${i + 1}">0</span>
+            <button class="btn-decrement" id="pr-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
             <button class="btn-add-to-cart" id="pr-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
         </div>
         `
@@ -137,10 +169,26 @@ for (let i = 0; i < 3; i++) {
         `
         <div id="luxury-car${i + 1}">
             <div class="image" id="lx-image${i + 1}"></div>
-            <p class="para" id="lx-para${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-            <button class="btn-increment" id="btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-            <span class="count" id="count${i + 1}">0</span>
-            <button class="btn-decrement" id="btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
+            <p class="brand" id="lx-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+            <p class="category-id" id="lx-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+            <p class="transmission-type" id="lx-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
+            <p class="fuel-type" id="lx-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
+            <p class="no-of-passenger" id="lx-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
+            <p class="daily-rate" id="lx-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
+            <p class="monthly-rate" id="lx-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
+            <p class="free-mileage-price" id="lx-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
+            <p class="extra-km-price" id="lx-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
+            <div class="color" id="lx-color${i + 1}">
+                <span>Color:</span>
+                <span class="white" id="lx-white${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="black" id="lx-black${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="red" id="lx-red${i + 1}"><i class="fas fa-circle"></i></span>
+                <span class="blue" id="lx-blue${i + 1}"><i class="fas fa-circle"></i></span>
+            </div>
+            <span class="left-cars" id="lx-left-cars${i + 1}">20 Left</span>
+            <button class="btn-increment" id="lx-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
+            <span class="count" id="lx-count${i + 1}">0</span>
+            <button class="btn-decrement" id="lx-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
             <button class="btn-add-to-cart" id="lx-btn-add-to-cart${i + 1}"><i class="fas fa-cart-plus"></i></button>
         </div>
         `
@@ -149,7 +197,7 @@ for (let i = 0; i < 3; i++) {
 }
 
 
-/*Cart popup view enable*/
+/*Cart popup view open & close*/
 $('#add-to-cart').click(function () {
     $('#cart-popup').css('display', 'flex');
 });
@@ -161,3 +209,14 @@ $(function () {
         $('#cart-popup').css('display', 'none');
     });
 });
+$('#btn-cart-popup-close').click(function () {
+    $('#cart-popup').css('display', 'none');
+});
+
+
+/*remove item form cart*/
+function removeItemFromCart(id) {
+    let parent_item = $(`#${id}`).closest('div').attr('id');
+    $(`#${parent_item}`).remove();
+}
+
