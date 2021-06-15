@@ -52,7 +52,7 @@ function registrationViewSetEnable() {
     $('#registration-popup').css("display", "flex");
     $.ajax({
         method: 'GET',
-        async: false,
+        async: true,
         url: './views/registrationFormImage.html',
         contentType: 'text/html',
         success: (data) => {
@@ -197,25 +197,55 @@ for (let i = 0; i < 3; i++) {
 }
 
 
-/*Cart popup view open & close*/
-$('#add-to-cart').click(function () {
+/*Notification, Cart, Profile popup views open & close*/
+//close popup windows when clicking other areas
+$(function () {
+    $('main').click(function () {
+        $('#notification-popup').css('display', 'none');
+        $('#cart-popup').css('display', 'none');
+        $('#profile-popup').css('display', 'none');
+    });
+});
+//notifications
+$('#notification').click(function () {
+    $('#notification-popup').css('display', 'flex');
+    $('#cart-popup').css('display', 'none');
+    $('#profile-popup').css('display', 'none');
+});
+$("#notification-popup").click(function (e) {
+    e.stopPropagation();
+});
+//cart
+$('#cart').click(function () {
     $('#cart-popup').css('display', 'flex');
+    $('#notification-popup').css('display', 'none');
+    $('#profile-popup').css('display', 'none');
 });
 $("#cart-popup").click(function (e) {
     e.stopPropagation();
 });
-$(function () {
-    $('main').click(function () {
-        $('#cart-popup').css('display', 'none');
-    });
-});
 $('#btn-cart-popup-close').click(function () {
     $('#cart-popup').css('display', 'none');
+});
+//profile
+$('#profile').click(function () {
+    $('#profile-popup').css('display', 'flex');
+    $('#cart-popup').css('display', 'none');
+    $('#notification-popup').css('display', 'none');
+});
+$("#profile-popup").click(function (e) {
+    e.stopPropagation();
 });
 
 
 /*remove item form cart*/
 function removeItemFromCart(id) {
+    let parent_item = $(`#${id}`).closest('div').attr('id');
+    $(`#${parent_item}`).remove();
+}
+
+/*remove notification*/
+function removeNotification(id) {
     let parent_item = $(`#${id}`).closest('div').attr('id');
     $(`#${parent_item}`).remove();
 }

@@ -29,10 +29,31 @@
         </ul>
         <ul class="menu3">
             <li id="notification"><i class="fas fa-bell"></i></li>
-            <li id="add-to-cart"><i class="fas fa-shopping-cart"></i></li>
+            <li id="cart"><i class="fas fa-shopping-cart"></i></li>
             <li id="profile"><i class="fas fa-user-circle"></i></li>
         </ul>
     </nav>
+    <div class="notification-popup" id="notification-popup">
+        <div class="notification-popup-container" id="notification-popup-container">
+            <div class="content">
+                <div class="notification" id="notification1">
+                    <span class="btn-remove-notification" id="btn-remove-notification1"
+                          onclick="removeNotification(this.id)">
+                        <i class="fas fa-minus-circle"></i>
+                    </span>
+                    <p><span>Your request is being processed.<br>Thanks for connect with us!</span></p>
+                </div>
+                <div class="notification" id="notification2">
+                    <span class="btn-remove-notification" id="btn-remove-notification2"
+                          onclick="removeNotification(this.id)">
+                        <i class="fas fa-minus-circle"></i>
+                    </span>
+                    <p><span>Your request is being processed.<br>Thanks for connect with us!</span></p>
+                </div>
+            </div>
+            <div class="footer"></div>
+        </div>
+    </div>
     <div class="cart-popup" id="cart-popup">
         <div class="cart-popup-container" id="cart-popup-container">
             <div class="button-container1">
@@ -40,8 +61,9 @@
             </div>
             <div class="content">
                 <div class="item" id="item1">
-                    <span class="btn-remove-item" id="btn-remove-item1" onclick="removeItemFromCart(this.id)"><i
-                            class="fas fa-minus-circle"></i></span>
+                    <span class="btn-remove-item" id="btn-remove-item1" onclick="removeItemFromCart(this.id)">
+                        <i class="fas fa-minus-circle"></i>
+                    </span>
                     <p class="car-brand" id="car-brand1">Item 1</p>
                     <p class="car-ct-id" id="car-ct-id1">CT-ID:<span>ABSD2154KL</span></p>
                     <p class="qty" id="qty1">QTY:<span>1</span></p>
