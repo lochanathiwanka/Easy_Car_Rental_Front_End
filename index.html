@@ -29,7 +29,10 @@
         </ul>
         <ul class="menu3">
             <li id="notification"><i class="fas fa-bell"></i></li>
-            <li id="cart"><i class="fas fa-shopping-cart"></i></li>
+            <li class="cart" id="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-item-count" id="cart-item-count">0</span>
+            </li>
             <li id="profile"><i class="fas fa-user-circle"></i></li>
         </ul>
     </nav>
@@ -59,8 +62,8 @@
             <div class="button-container1">
                 <button class="btn-cart-popup-close" id="btn-cart-popup-close"><i class="fas fa-times"></i></button>
             </div>
-            <div class="content">
-                <div class="item" id="item1">
+            <div class="content" id="cart-items-container">
+                <!--<div class="item" id="item1">
                     <span class="btn-remove-item" id="btn-remove-item1" onclick="removeItemFromCart(this.id)">
                         <i class="fas fa-minus-circle"></i>
                     </span>
@@ -78,7 +81,7 @@
                     <p class="qty" id="qty2">QTY:<span>1</span></p>
                     <p class="cart-rental-fee" id="cart-rental-fee2">Rental Fee:<span>5000</span></p>
                     <p class="cart-ldw-fee" id="cart-ldw-fee2">LDW Fee:<span>10000</span></p>
-                </div>
+                </div>-->
                 <!--<div class="item" id="item3">
                     <span onclick="removeItemFromCart(this.id)" class="btn-remove-item" id="btn-remove-item3"><i class="fas fa-minus-circle"></i></span>
                     <p class="car-brand" id="car-brand3">Item 3</p>

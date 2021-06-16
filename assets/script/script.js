@@ -239,9 +239,16 @@ $("#profile-popup").click(function (e) {
 
 
 //remove item form cart
+let cart_items_count = 0;
 function removeItemFromCart(id) {
     let parent_item = $(`#${id}`).closest('div').attr('id');
     $(`#${parent_item}`).remove();
+
+    cart_items_count -= 1;
+    if (cart_items_count === 0) {
+        $('#cart-item-count').css('display', 'none');
+    }
+    $('#cart-item-count').text(cart_items_count);
 }
 
 //remove notification
@@ -252,13 +259,6 @@ function removeNotification(id) {
 
 
 //--------------------------------------------Add item to cart------------------------------------------------------
-//calculate and set total rental fee
-function calculateTotalRentalFee(parent, fee) {
-    let old_value = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
-    $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((old_value + fee) + ".00");
-    /*console.log(old_value);*/
-}
-
 //increment vehicle qty
 function incrementVehicleQTY(id) {
     let parent = $(`#${id}`).closest('div').attr('id');
@@ -491,11 +491,12 @@ function setReturnDate(id) {
 }
 
 //add vehicle to cart
+let booking_details_list = [];
 function addVehicleToCart(id) {
     //get parent container id
     let parent = $(`#${id}`).closest('div').attr('id');
 
-    //get pickup date id
+    /*//get pickup date id
     let pickup_date_id = $(`#${parent}`).children('div').eq(2).children('input').eq(0).attr('id');
     //get return date id
     let return_date_id = $(`#${parent}`).children('div').eq(3).children('input').eq(0).attr('id');
@@ -506,32 +507,56 @@ function addVehicleToCart(id) {
     // To calculate the time difference of two dates
     let date_diff_in_time = return_date.getTime() - pickup_date.getTime();
     // To calculate the no. of days between two dates
-    let date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
+    let date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);*/
 
-    //check "Driver" checkbox is clicked or not
-    let driver_checkbox_id = $(`#${parent}`).children('div').eq(4).children('input').eq(0).attr('id');
-    let driver = $(`#${driver_checkbox_id}`).is(":checked") ? 'yes' : 'no';
-    let driver_charge = $(`#${driver_checkbox_id}`).is(":checked") ? 1000.00 : 0;
+    /*    //check "Driver" checkbox is clicked or not
+        let driver_checkbox_id = $(`#${parent}`).children('div').eq(4).children('input').eq(0).attr('id');
+        let driver = $(`#${driver_checkbox_id}`).is(":checked") ? 'yes' : 'no';
+        let driver_charge = $(`#${driver_checkbox_id}`).is(":checked") ? 1000.00 : 0;*/
 
     let isUserLogged = checkIsUserLogged();
     if (isUserLogged) {
         let brand = $(`#${parent}`).children('p').eq(0).text();
         let ct_id = $(`#${parent}`).children('p').eq(1).children('span').eq(0).text();
-        let qty = $(`#${parent}`).children('span').eq(1).text();
-        let daily_rate_fee = $(`#${parent}`).children('p').eq(5).children('span').eq(0).text();
-        let ldw_fee = $(`#${parent}`).children('p').eq(7).children('span').eq(0).text();
-        let rental_fee = driver_charge + (qty > 0 ? parseFloat(daily_rate_fee) * date_diff_in_days * qty : parseFloat(daily_rate_fee) * date_diff_in_days);
-        /*let rental_fee =  $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(tot_rental_fee+".00");*/
-        calculateTotalRentalFee(parent, rental_fee);
+        let qty = parseInt($(`#${parent}`).children('span').eq(1).text());
+        let ldw_fee = parseFloat($(`#${parent}`).children('p').eq(7).children('span').eq(0).text());
+        let rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
 
-        console.log({
-            brand: brand,
-            ct_id: ct_id,
-            qty: qty,
-            daily_rate_fee: daily_rate_fee,
-            ldw_fee: ldw_fee,
-            rental_fee: rental_fee
-        });
+        if (rental_fee !== 0) {
+            if (cart_items_count < 3) {
+                $('#cart-items-container').append(
+                    `
+                 <div class="item" id="item${cart_items_count + 1}">
+                    <span class="btn-remove-item" id="btn-remove-item${cart_items_count + 1}" onclick="removeItemFromCart(this.id)">
+                        <i class="fas fa-minus-circle"></i>
+                    </span>
+                    <p class="car-brand" id="car-brand${cart_items_count + 1}">${brand}</p>
+                    <p class="car-ct-id" id="car-ct-id${cart_items_count + 1}">CT-ID:<span>${ct_id}</span></p>
+                    <p class="qty" id="qty${cart_items_count + 1}">QTY:<span>${qty}</span></p>
+                    <p class="cart-rental-fee" id="cart-rental-fee${cart_items_count + 1}">Rental Fee:<span>${rental_fee}</span></p>
+                    <p class="cart-ldw-fee" id="cart-ldw-fee${cart_items_count + 1}">LDW Fee:<span>${ldw_fee}</span></p>
+                </div>
+                `
+                );
+
+                cart_items_count += 1;
+
+                //add booking details into array list
+                booking_details_list.push({
+                    rid: 'R001',
+                    cid: 'C001',
+
+                });
+
+                alert('Your vehicle is added to the cart!');
+                $('#cart-item-count').css('display', 'flex');
+                $('#cart-item-count').text(cart_items_count);
+            } else {
+                alert('You have already reached the maximum number limit of items per one booking!');
+            }
+        } else {
+            alert('Select a pickup & return date!');
+        }
 
     } else {
         //jump to Login page

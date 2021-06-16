@@ -103,6 +103,23 @@ header > nav.sticky > .menu3 > li > i:hover {
     transition: all 0.3s ease-in-out;
 }
 
+header > nav > .menu3 > .cart > .cart-item-count {
+    position: absolute;
+    font-size: 15px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: -5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 30px;
+    background-color: #D01110;
+}
+
+header > nav.sticky > .menu3 > .cart > .cart-item-count {
+    color: white;
+}
+
 header > nav > ul > li > a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
@@ -123,58 +140,6 @@ header > nav > ul > li > a:hover {
 
 header > nav.sticky > ul > li > a:hover {
     color: #FBFBFB;
-    transition: all 0.3s ease;
-}
-
-header > nav > .profile-container {
-    position: absolute;
-    width: 100px;
-    height: 100%;
-    top: 50%;
-    left: 94%;
-    transform: translate(-50%, -50%);
-}
-
-header > nav > .profile-container > .add-to-cart {
-    position: absolute;
-    background: url("../icons/icon-cart-white.png") no-repeat center;
-    background-size: cover;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    transition: all 0.3s ease;
-}
-
-header > nav > .profile-container > .add-to-cart:hover {
-    background: url("../icons/icon-cart-black.png") no-repeat center;
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-    transform: scale(1.1);
-    transition: all 0.3s ease;
-}
-
-header > nav > .profile-container > .profile {
-    position: absolute;
-    background: url("../icons/icon-profile-white.png") no-repeat center;
-    background-size: cover;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    transition: all 0.3s ease;
-}
-
-header > nav > .profile-container > .profile:hover {
-    transform: scale(1.1);
-    background: url("../icons/icon-profile-black.png") no-repeat center;
     transition: all 0.3s ease;
 }
 
@@ -1243,6 +1208,7 @@ main {
     cursor: crosshair;
 }
 
+/*single car image*/
 .image {
     position: absolute;
     width: 100%;
@@ -1253,7 +1219,6 @@ main {
     border-radius: 10px 10px 10px 10px;
     transition: all 0.3s ease-in-out;
 }
-
 .image:before {
     position: absolute;
     content: "";
@@ -1279,11 +1244,13 @@ p > span {
     padding-left: 10px;
 }
 
+/*car details container image*/
 .car-image {
     position: absolute;
     width: 100%;
     height: 250px;
-    background-color: #18A558;
+    background: url("../car-3.jpg") no-repeat center;
+    background-size: cover;
     transition: all 0.3s ease-in-out;
 }
 
