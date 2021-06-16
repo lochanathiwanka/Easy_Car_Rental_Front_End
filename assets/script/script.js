@@ -101,8 +101,8 @@ for (let i = 0; i < 5; i++) {
         `
         <div id="general-car${i + 1}">
             <div class="image" id="gn-image${i + 1}"></div>
-         <!--    <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-            <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+            <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+         <!--   <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
             <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
             <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
             <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
@@ -135,8 +135,8 @@ for (let i = 0; i < 4; i++) {
         `
         <div id="premium-car${i + 1}">
             <div class="image" id="pr-image${i + 1}"></div>
-         <!--   <p class="brand" id="pr-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-            <p class="category-id" id="pr-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+           <p class="brand" id="pr-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+         <!--    <p class="category-id" id="pr-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
             <p class="transmission-type" id="pr-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
             <p class="fuel-type" id="pr-fuel-type${i + 1}">Fuel: Diesel</p>
             <p class="no-of-passenger" id="pr-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
@@ -169,8 +169,8 @@ for (let i = 0; i < 3; i++) {
         `
         <div id="luxury-car${i + 1}">
             <div class="image" id="lx-image${i + 1}"></div>
-         <!--    <p class="brand" id="lx-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-            <p class="category-id" id="lx-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
+             <p class="brand" id="lx-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
+        <!--    <p class="category-id" id="lx-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
             <p class="transmission-type" id="lx-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
             <p class="fuel-type" id="lx-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
             <p class="no-of-passenger" id="lx-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
@@ -251,18 +251,288 @@ function removeNotification(id) {
 }
 
 
-//Add item to cart
-function addItemToCart(id) {
+//--------------------------------------------Add item to cart------------------------------------------------------
+//calculate and set total rental fee
+function calculateTotalRentalFee(parent, fee) {
+    let old_value = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
+    $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((old_value + fee) + ".00");
+    /*console.log(old_value);*/
+}
+
+//increment vehicle qty
+function incrementVehicleQTY(id) {
+    let parent = $(`#${id}`).closest('div').attr('id');
+    let qty_id = $(`#${parent}`).children('span').eq(1).attr('id');
+    let old_qty_value = parseInt($(`#${qty_id}`).text());
+    $(`#${qty_id}`).text(old_qty_value + 1);
+
+    let new_qty_value = parseInt($(`#${qty_id}`).text());
+
+    //get pickup date id
+    let pickup_date_id = $(`#${parent}`).children('div').eq(2).children('input').eq(0).attr('id');
+    //get return date id
+    let return_date_id = $(`#${parent}`).children('div').eq(3).children('input').eq(0).attr('id');
+
+    let pickup_date = new Date($(`#${pickup_date_id}`).val());
+    let return_date = new Date($(`#${return_date_id}`).val());
+
+    let date_diff_in_time;
+    let date_diff_in_days;
+    //check if pickup date or return date is empty or not
+    if (isNaN(pickup_date.getTime()) && isNaN(return_date.getTime())) {
+        //if pickup date & return date are NaN, there is no date different..so its value should be 0;
+        date_diff_in_days = 0;
+    } else if (!isNaN(pickup_date.getTime()) && !isNaN(return_date.getTime())) {
+        //if pickup date & return date are not NaN..
+        // To calculate the time difference of two dates
+        date_diff_in_time = return_date.getTime() - pickup_date.getTime();
+        // To calculate the no. of days between two dates
+        date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
+    } else {
+        date_diff_in_days = 1;
+    }
+
+    //if date different is greater than 1, then set the new rental fee
+    if (date_diff_in_days > 0) {
+        //get daily rate fee
+        let daily_rate_fee = $(`#${parent}`).children('p').eq(5).children('span').eq(0).text();
+        let new_rental_fee = (daily_rate_fee * date_diff_in_days) * new_qty_value;
+
+        //check if driver is selected or not and then add proper values to new rental fee
+        let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
+        if (is_driver_checked) {
+            //add driver's fee into the new rental fee
+            new_rental_fee += 1000;
+        }
+
+        //set new rental fee
+        $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(new_rental_fee + ".00");
+    }
+
+}
+
+//decrement vehicle qty
+function decrementVehicleQTY(id) {
+    let parent = $(`#${id}`).closest('div').attr('id');
+    let qty_id = $(`#${parent}`).children('span').eq(1).attr('id');
+    let old_qty_value = parseInt($(`#${qty_id}`).text());
+    let new_value = old_qty_value - 1;
+    if (new_value > 0) {
+        $(`#${qty_id}`).text(old_qty_value - 1);
+    }
+
+    let new_qty_value = parseInt($(`#${qty_id}`).text());
+
+    //get pickup date id
+    let pickup_date_id = $(`#${parent}`).children('div').eq(2).children('input').eq(0).attr('id');
+    //get return date id
+    let return_date_id = $(`#${parent}`).children('div').eq(3).children('input').eq(0).attr('id');
+
+    let pickup_date = new Date($(`#${pickup_date_id}`).val());
+    let return_date = new Date($(`#${return_date_id}`).val());
+
+    let date_diff_in_time;
+    let date_diff_in_days;
+    //check if pickup date or return date is empty or not
+    if (isNaN(pickup_date.getTime()) && isNaN(return_date.getTime())) {
+        //if pickup date & return date are NaN, there is no date different..so its value should be 0;
+        date_diff_in_days = 0;
+    } else if (!isNaN(pickup_date.getTime()) && !isNaN(return_date.getTime())) {
+        //if pickup date & return date are not NaN..
+        // To calculate the time difference of two dates
+        date_diff_in_time = return_date.getTime() - pickup_date.getTime();
+        // To calculate the no. of days between two dates
+        date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
+    } else {
+        date_diff_in_days = 1;
+    }
+
+    //if date different is greater than 1, then set the new rental fee
+    if (date_diff_in_days > 0) {
+        //get daily rate fee
+        let daily_rate_fee = $(`#${parent}`).children('p').eq(5).children('span').eq(0).text();
+        let new_rental_fee = (daily_rate_fee * date_diff_in_days) * new_qty_value;
+
+        //check if driver is selected or not and then add proper values to new rental fee
+        let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
+        if (is_driver_checked) {
+            //add driver's fee into the new rental fee
+            new_rental_fee += 1000;
+        }
+
+        //set new rental fee
+        $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(new_rental_fee + ".00");
+    }
+}
+
+//"Driver" checkbox on click
+function driverCheckboxOnClick(id) {
+    //get parent
+    let parent = $(`#${id}`).parent('div').eq(0).parent('div').eq(0).attr('id');
+    let is_driver_checked = $(`#${id}`).is(":checked");
+
+    let old_rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
+    if (is_driver_checked) {
+        $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((old_rental_fee + 1000) + ".00");
+    } else {
+        $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((old_rental_fee - 1000) + ".00");
+    }
+}
+
+//set pickup date
+function setPickupDate(id) {
+    //get parent
+    let parent = $(`#${id}`).parent('div').eq(0).parent('div').eq(0).attr('id');
+
+    //get pickup date
+    let pickup_date = new Date($(`#${id}`).val());
+
+    //get return date id
+    let return_date_id = $(`#${parent}`).children('div').eq(3).children('input').eq(0).attr('id');
+    //get return date
+    let return_date = new Date($(`#${return_date_id}`).val());
+
+    let date_diff_in_time;
+    let date_diff_in_days;
+    //check if return date is empty or not
+    if (!isNaN(return_date.getTime())) {
+        // To calculate the time difference of two dates
+        date_diff_in_time = return_date.getTime() - pickup_date.getTime();
+        // To calculate the no. of days between two dates
+        date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
+    } else {
+        //if return date is NaN, there is no date different..so its value should be 1;
+        date_diff_in_days = 1;
+    }
+
+
+    //get qty
+    let qty = $(`#${parent}`).children('span').eq(1).text();
+    //get daily rate fee
+    let daily_rate_fee = $(`#${parent}`).children('p').eq(5).children('span').eq(0).text();
+    //get exist rental fee
+    let old_rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
+
+    //calculate new rental fee
+    let new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+
+    //check if driver is selected or not and then add proper values to new rental fee
+    let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
+    if (is_driver_checked) {
+        if (new_rental_fee > 0) {
+            //set new rental fee with driver's charge
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee + 1000) + ".00");
+        } else {
+            alert('Date difference is not a valid one..Enter a valid Date!');
+        }
+    } else {
+        if (new_rental_fee > 0) {
+            //set new rental fee without with driver's charge
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee) + ".00");
+        } else {
+            alert('Date difference is not a valid one..Enter a valid Date!');
+        }
+    }
+}
+
+function setReturnDate(id) {
+    //get parent
+    let parent = $(`#${id}`).parent('div').eq(0).parent('div').eq(0).attr('id');
+
+    //get return date
+    let return_date = new Date($(`#${id}`).val());
+
+    //get pickup date id
+    let pickup_date_id = $(`#${parent}`).children('div').eq(2).children('input').eq(0).attr('id');
+    let pickup_date = new Date($(`#${pickup_date_id}`).val());
+
+    let date_diff_in_time;
+    let date_diff_in_days;
+    //check if pickup date is empty or not
+    if (!isNaN(pickup_date.getTime())) {
+        // To calculate the time difference of two dates
+        date_diff_in_time = return_date.getTime() - pickup_date.getTime();
+        // To calculate the no. of days between two dates
+        date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
+    } else {
+        //if pickup date is NaN, there is no date different..so its value should be 1;
+        date_diff_in_days = 1;
+    }
+
+
+    //get qty
+    let qty = $(`#${parent}`).children('span').eq(1).text();
+    //get daily rate fee
+    let daily_rate_fee = $(`#${parent}`).children('p').eq(5).children('span').eq(0).text();
+    //get exist rental fee
+    let old_rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
+
+    //calculate new rental fee
+    let new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+
+    //check if driver is selected or not and then add proper values to new rental fee
+    let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
+    if (is_driver_checked) {
+        if (new_rental_fee > 0) {
+            //set new rental fee with driver's charge
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee + 1000) + ".00");
+        } else {
+            alert('Date difference is not a valid one..Enter a valid Date!');
+        }
+    } else {
+        if (new_rental_fee > 0) {
+            //set new rental fee without with driver's charge
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee) + ".00");
+        } else {
+            alert('Date difference is not a valid one..Enter a valid Date!');
+        }
+    }
+
+}
+
+//add vehicle to cart
+function addVehicleToCart(id) {
+    //get parent container id
+    let parent = $(`#${id}`).closest('div').attr('id');
+
+    //get pickup date id
+    let pickup_date_id = $(`#${parent}`).children('div').eq(2).children('input').eq(0).attr('id');
+    //get return date id
+    let return_date_id = $(`#${parent}`).children('div').eq(3).children('input').eq(0).attr('id');
+
+    let pickup_date = new Date($(`#${pickup_date_id}`).val());
+    let return_date = new Date($(`#${return_date_id}`).val());
+
+    // To calculate the time difference of two dates
+    let date_diff_in_time = return_date.getTime() - pickup_date.getTime();
+    // To calculate the no. of days between two dates
+    let date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
+
+    //check "Driver" checkbox is clicked or not
+    let driver_checkbox_id = $(`#${parent}`).children('div').eq(4).children('input').eq(0).attr('id');
+    let driver = $(`#${driver_checkbox_id}`).is(":checked") ? 'yes' : 'no';
+    let driver_charge = $(`#${driver_checkbox_id}`).is(":checked") ? 1000.00 : 0;
+
     let isUserLogged = checkIsUserLogged();
     if (isUserLogged) {
-        //get parent id
-        let parent = $(`#${id}`).closest('div').attr('id');
         let brand = $(`#${parent}`).children('p').eq(0).text();
-        let ct_id = $(`#${parent}`).children('p').eq(1).text();
+        let ct_id = $(`#${parent}`).children('p').eq(1).children('span').eq(0).text();
         let qty = $(`#${parent}`).children('span').eq(1).text();
-        let rental_fee;
-        let ldw_fee;
-        alert(child_value);
+        let daily_rate_fee = $(`#${parent}`).children('p').eq(5).children('span').eq(0).text();
+        let ldw_fee = $(`#${parent}`).children('p').eq(7).children('span').eq(0).text();
+        let rental_fee = driver_charge + (qty > 0 ? parseFloat(daily_rate_fee) * date_diff_in_days * qty : parseFloat(daily_rate_fee) * date_diff_in_days);
+        /*let rental_fee =  $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(tot_rental_fee+".00");*/
+        calculateTotalRentalFee(parent, rental_fee);
+
+        console.log({
+            brand: brand,
+            ct_id: ct_id,
+            qty: qty,
+            daily_rate_fee: daily_rate_fee,
+            ldw_fee: ldw_fee,
+            rental_fee: rental_fee
+        });
+
     } else {
         //jump to Login page
         document.getElementById("jump_to_this_location").scrollIntoView({behavior: 'auto'});
@@ -278,5 +548,46 @@ function checkIsUserLogged() {
         return false;
     }
 }
+
+//vehicle color choosers on click
+let color = 'white';
+$('.white').click(function () {
+    $(this).css({
+        border: '2px solid #E7EDEB',
+        width: '30px',
+        height: '30px',
+        borderRadius: '100px'
+    });
+    color = 'white';
+});
+$('.black').click(function () {
+    $(this).css({
+        border: '2px solid #1C2520',
+        width: '30px',
+        height: '30px',
+        borderRadius: '100px'
+    });
+    let parent = $(this).closest('div').attr('id');
+    let white = $(`#${parent}`).children('span').eq(1).attr('id');
+    color = 'black';
+});
+$('.red').click(function () {
+    $(this).css({
+        border: '2px solid #DB1F48',
+        width: '30px',
+        height: '30px',
+        borderRadius: '100px'
+    });
+    color = 'red';
+});
+$('.blue').click(function () {
+    $(this).css({
+        border: '2px solid #151983',
+        width: '30px',
+        height: '30px',
+        borderRadius: '100px'
+    });
+    color = 'blue';
+});
 
 

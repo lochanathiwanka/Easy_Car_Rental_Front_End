@@ -67,8 +67,8 @@
                     <p class="car-brand" id="car-brand1">Item 1</p>
                     <p class="car-ct-id" id="car-ct-id1">CT-ID:<span>ABSD2154KL</span></p>
                     <p class="qty" id="qty1">QTY:<span>1</span></p>
-                    <p class="car-rental-fee" id="car-rental-fee1">Rental Fee:<span>5000</span></p>
-                    <p class="car-ldw-fee" id="car-ldw-fee1">LDW Fee:<span>10000</span></p>
+                    <p class="cart-rental-fee" id="cart-rental-fee1">Rental Fee:<span>5000</span></p>
+                    <p class="cart-ldw-fee" id="cart-ldw-fee1">LDW Fee:<span>10000</span></p>
                 </div>
                 <div class="item" id="item2">
                     <span class="btn-remove-item" id="btn-remove-item2" onclick="removeItemFromCart(this.id)"><i
@@ -76,8 +76,8 @@
                     <p class="car-brand" id="car-brand2">Item 2</p>
                     <p class="car-ct-id" id="car-ct-id2">CT-ID:<span>ABSD2154KL</span></p>
                     <p class="qty" id="qty2">QTY:<span>1</span></p>
-                    <p class="car-rental-fee" id="car-rental-fee2">Rental Fee:<span>5000</span></p>
-                    <p class="car-ldw-fee" id="car-ldw-fee2">LDW Fee:<span>10000</span></p>
+                    <p class="cart-rental-fee" id="cart-rental-fee2">Rental Fee:<span>5000</span></p>
+                    <p class="cart-ldw-fee" id="cart-ldw-fee2">LDW Fee:<span>10000</span></p>
                 </div>
                 <!--<div class="item" id="item3">
                     <span onclick="removeItemFromCart(this.id)" class="btn-remove-item" id="btn-remove-item3"><i class="fas fa-minus-circle"></i></span>
@@ -184,37 +184,11 @@
             <div class="title-container" id="title-container"><h1>Vehicles</h1></div>
 
             <div class="general-cars-title-container" id="general-cars-title-container"><h1>General Cars</h1></div>
-            <div class="general-cars-category" id="general-cars-category">
-                <!--<div id="general-car1">
-                    <div class="image" id="gn-image1"></div>
-                    <p class="para" id="gn-para1">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="gn-btn-add-to-cart1"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="general-car2">
-                    <div class="image" id="gn-image2"></div>
-                    <p class="para" id="gn-para2">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="gn-btn-add-to-cart2"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="general-car-3">
-                    <div class="image" id="gn-image3"></div>
-                    <p class="para" id="gn-para3">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="gn-btn-add-to-cart3"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="general-car-4">
-                    <div class="image" id="gn-image4"></div>
-                    <p class="para" id="gn-para4">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="gn-btn-add-to-cart4"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="general-car-5">
-                    <div class="image" id="gn-image5"></div>
-                    <p class="para" id="gn-para5">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="gn-btn-add-to-cart5"><i class="fas fa-cart-plus"></i></button>
-                </div>-->
-            </div>
+            <div class="general-cars-category" id="general-cars-category"></div>
             <div class="general-car-details-container" id="general-car-details-container">
                 <div class="car-image"></div>
-                <p class="brand" id="gn-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                <p class="category-id" id="gn-category-id">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="car-brand" id="gn-car-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
+                <p class="category-id" id="gn-category-id">CT-ID:<span>V001</span></p>
                 <p class="transmission-type" id="gn-transmission-type">Transmission:<span>Auto</span></p>
                 <p class="fuel-type" id="gn-fuel-type">Fuel:<span>Diesel</span></p>
                 <p class="no-of-passenger" id="gn-no-of-passenger">No.Passenger:<span>5</span></p>
@@ -225,124 +199,132 @@
                 <p class="extra-km-price" id="gn-extra-km-price">Extra KM:<span>1000.00 per 1KM</span></p>
                 <div class="color" id="gn-color">
                     <span>Color:</span>
-                    <span class="white" id="gn-white}"><i class="fas fa-circle"></i></span>
+                    <span class="white" id="gn-white"><i class="fas fa-circle"></i></span>
                     <span class="black" id="gn-black"><i class="fas fa-circle"></i></span>
                     <span class="red" id="gn-red"><i class="fas fa-circle"></i></span>
                     <span class="blue" id="gn-blue"><i class="fas fa-circle"></i></span>
                 </div>
                 <span class="left-cars" id="gn-left-cars">20 Left</span>
-                <div class="pickup-date-container mb-3">
+                <div class="pickup-date-container mb-3" id="gn-pickup-date-container">
                     <label class="form-label" for="gn-pickup-date">Pickup Date</label>
-                    <input class="pickup-date form-control form-control-sm" id="gn-pickup-date" type="date">
+                    <input class="pickup-date form-control form-control-sm" id="gn-pickup-date"
+                           onchange="setPickupDate(this.id)" type="date">
                 </div>
-                <div class="return-date-container mb-3">
+                <div class="return-date-container mb-3" id="gn-return-date-container">
                     <label class="form-label" for="gn-return-date">Return Date</label>
-                    <input class="pickup-date form-control form-control-sm" id="gn-return-date" type="date">
+                    <input class="pickup-date form-control form-control-sm" id="gn-return-date"
+                           onchange="setReturnDate(this.id)" type="date">
                 </div>
                 <div class="driver-check-container form-check">
-                    <input class="form-check-input" id="gn-driver" name="driver" type="checkbox" value="">
+                    <input class="form-check-input" id="gn-driver" name="driver"
+                           onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
                     <label class="form-check-label" for="gn-driver">
                         Driver
                     </label>
                 </div>
-                <button class="btn-increment" id="gn-btn-increment"><i class="far fa-plus-square"></i></button>
-                <span class="count" id="gn-count">0</span>
-                <button class="btn-decrement" id="gn-btn-decrement"><i class="far fa-minus-square"></i></button>
-                <button class="btn-add-to-cart" id="gn-btn-add-to-cart" onclick="addItemToCart(this.id)"><i
-                        class="fas fa-cart-plus"></i></button>
+                <button class="btn-increment" id="gn-btn-increment" onclick="incrementVehicleQTY(this.id)"><i
+                        class="far fa-plus-square"></i></button>
+                <span class="qty" id="gn-qty">1</span>
+                <button class="btn-decrement" id="gn-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
+                        class="far fa-minus-square"></i></button>
+                <p class="rental-fee" id="gn-rental-fee">Rental Fee: <span>0.00</span></p>
+                <button class="btn-add-to-cart" id="gn-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
+                    <i class="fas fa-cart-plus"></i>
+                </button>
             </div>
 
             <div class="premium-cars-title-container" id="premium-cars-title-container"><h1>Premium Cars</h1></div>
-            <div class="premium-cars-category" id="premium-cars-category">
-                <!--<div id="premium-car1">
-                    <div class="image" id="pr-image1"></div>
-                    <p class="para" id="pr-para1">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="pr-btn-add-to-cart1"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="premium-car2">
-                    <div class="image" id="pr-image2"></div>
-                    <p class="para" id="pr-para2">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="pr-btn-add-to-cart2"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="premium-car3">
-                    <div class="image" id="pr-image3"></div>
-                    <p class="para" id="pr-para3">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="pr-btn-add-to-cart3"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="premium-car4">
-                    <div class="image" id="pr-image4"></div>
-                    <p class="para" id="pr-para4">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="pr-btn-add-to-cart4"><i class="fas fa-cart-plus"></i></button>
-                </div>-->
-            </div>
+            <div class="premium-cars-category" id="premium-cars-category"></div>
             <div class="premium-car-details-container" id="premium-car-details-container">
                 <div class="car-image"></div>
-                <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
-                <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
-                <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
-                <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
-                <p class="daily-rate" id="gn-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
-                <p class="monthly-rate" id="gn-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
-                <p class="free-mileage-price" id="gn-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
-                <p class="extra-km-price" id="gn-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
-                <div class="color" id="gn-color${i + 1}">
+                <p class="car-brand" id="pr-car-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
+                <p class="category-id" id="pr-category-id">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="transmission-type" id="pr-transmission-type">Transmission:<span>Auto</span></p>
+                <p class="fuel-type" id="pr-fuel-type">Fuel:<span>Diesel</span></p>
+                <p class="no-of-passenger" id="pr-no-of-passenger">No.Passenger:<span>5</span></p>
+                <p class="daily-rate" id="pr-daily-rate">Daily Rate:<span>5000.00</span></p>
+                <p class="monthly-rate" id="pr-monthly-rate">Monthly Rate:<span>5000.00</span></p>
+                <p class="ldw-fee" id="pr-ldw-fee${i + 1}">LDW FEE:<span>10000.00</span></p>
+                <p class="free-mileage-price" id="pr-free-mileage-price">Free Mileage:<span>5KM</span></p>
+                <p class="extra-km-price" id="pr-extra-km-price">Extra KM:<span>1000.00 per 1KM</span></p>
+                <div class="color" id="pr-color">
                     <span>Color:</span>
-                    <span class="white" id="gn-white${i + 1}"><i class="fas fa-circle"></i></span>
-                    <span class="black" id="gn-black${i + 1}"><i class="fas fa-circle"></i></span>
-                    <span class="red" id="gn-red${i + 1}"><i class="fas fa-circle"></i></span>
-                    <span class="blue" id="gn-blue${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="white" id="pr-white"><i class="fas fa-circle"></i></span>
+                    <span class="black" id="pr-black"><i class="fas fa-circle"></i></span>
+                    <span class="red" id="pr-red"><i class="fas fa-circle"></i></span>
+                    <span class="blue" id="pr-blue"><i class="fas fa-circle"></i></span>
                 </div>
-                <span class="left-cars" id="gn-left-cars${i + 1}">20 Left</span>
-                <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-                <span class="count" id="gn-count${i + 1}">0</span>
-                <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-                <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i
-                        class="fas fa-cart-plus"></i></button>
+                <span class="left-cars" id="pr-left-cars">20 Left</span>
+                <div class="pickup-date-container mb-3" id="pr-pickup-date-container">
+                    <label class="form-label" for="pr-pickup-date">Pickup Date</label>
+                    <input class="pickup-date form-control form-control-sm" id="pr-pickup-date" type="date">
+                </div>
+                <div class="return-date-container mb-3" id="pr-return-date-container">
+                    <label class="form-label" for="pr-return-date">Return Date</label>
+                    <input class="pickup-date form-control form-control-sm" id="pr-return-date" type="date">
+                </div>
+                <div class="driver-check-container form-check">
+                    <input class="form-check-input" id="pr-driver" name="driver" type="checkbox" value="">
+                    <label class="form-check-label" for="pr-driver">
+                        Driver
+                    </label>
+                </div>
+                <button class="btn-increment" id="pr-btn-increment" onclick="incrementVehicleQTY(this.id)"><i
+                        class="far fa-plus-square"></i></button>
+                <span class="qty" id="pr-qty">0</span>
+                <button class="btn-decrement" id="pr-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
+                        class="far fa-minus-square"></i></button>
+                <p class="rental-fee" id="pr-rental-fee">Rental Fee: <span>0.00</span></p>
+                <button class="btn-add-to-cart" id="pr-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
+                    <i class="fas fa-cart-plus"></i>
+                </button>
             </div>
 
             <div class="luxury-cars-title-container" id="luxury-cars-title-container"><h1>Luxury Cars</h1></div>
-            <div class="luxury-cars-category" id="luxury-cars-category">
-                <!--<div id="luxury-car1">
-                    <div class="image" id="lx-image1"></div>
-                    <p class="para" id="lx-para1">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="lx-btn-add-to-cart1"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="luxury-car2">
-                    <div class="image" id="lx-image2"></div>
-                    <p class="para" id="lx-para2">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="lx-btn-add-to-cart2"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div id="luxury-car3">
-                    <div class="image" id="lx-image3"></div>
-                    <p class="para" id="lx-para3">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                    <button class="btn-add-to-cart" id="lx-btn-add-to-cart3"><i class="fas fa-cart-plus"></i></button>
-                </div>-->
-            </div>
+            <div class="luxury-cars-category" id="luxury-cars-category"></div>
             <div class="luxury-car-details-container" id="luxury-car-details-container">
                 <div class="car-image"></div>
-                <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
-                <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
-                <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
-                <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
-                <p class="daily-rate" id="gn-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
-                <p class="monthly-rate" id="gn-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
-                <p class="free-mileage-price" id="gn-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
-                <p class="extra-km-price" id="gn-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
-                <div class="color" id="gn-color${i + 1}">
+                <p class="car-brand" id="lx-car-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
+                <p class="category-id" id="lx-category-id">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="transmission-type" id="lx-transmission-type">Transmission:<span>Auto</span></p>
+                <p class="fuel-type" id="lx-fuel-type">Fuel:<span>Diesel</span></p>
+                <p class="no-of-passenger" id="lx-no-of-passenger">No.Passenger:<span>5</span></p>
+                <p class="daily-rate" id="lx-daily-rate">Daily Rate:<span>5000.00</span></p>
+                <p class="monthly-rate" id="lx-monthly-rate">Monthly Rate:<span>5000.00</span></p>
+                <p class="ldw-fee" id="lx-ldw-fee${i + 1}">LDW FEE:<span>10000.00</span></p>
+                <p class="free-mileage-price" id="lx-free-mileage-price">Free Mileage:<span>5KM</span></p>
+                <p class="extra-km-price" id="lx-extra-km-price">Extra KM:<span>1000.00 per 1KM</span></p>
+                <div class="color" id="lx-color">
                     <span>Color:</span>
-                    <span class="white" id="gn-white${i + 1}"><i class="fas fa-circle"></i></span>
-                    <span class="black" id="gn-black${i + 1}"><i class="fas fa-circle"></i></span>
-                    <span class="red" id="gn-red${i + 1}"><i class="fas fa-circle"></i></span>
-                    <span class="blue" id="gn-blue${i + 1}"><i class="fas fa-circle"></i></span>
+                    <span class="white" id="lx-white"><i class="fas fa-circle"></i></span>
+                    <span class="black" id="lx-black"><i class="fas fa-circle"></i></span>
+                    <span class="red" id="lx-red"><i class="fas fa-circle"></i></span>
+                    <span class="blue" id="lx-blue"><i class="fas fa-circle"></i></span>
                 </div>
-                <span class="left-cars" id="gn-left-cars${i + 1}">20 Left</span>
-                <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-                <span class="count" id="gn-count${i + 1}">0</span>
-                <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-                <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i
-                        class="fas fa-cart-plus"></i></button>
+                <span class="left-cars" id="lx-left-cars">20 Left</span>
+                <div class="pickup-date-container mb-3" id="lx-pickup-date-container">
+                    <label class="form-label" for="lx-pickup-date">Pickup Date</label>
+                    <input class="pickup-date form-control form-control-sm" id="lx-pickup-date" type="date">
+                </div>
+                <div class="return-date-container mb-3" id="lx-return-date-container">
+                    <label class="form-label" for="lx-return-date">Return Date</label>
+                    <input class="pickup-date form-control form-control-sm" id="lx-return-date" type="date">
+                </div>
+                <div class="driver-check-container form-check">
+                    <input class="form-check-input" id="lx-driver" name="driver" type="checkbox" value="">
+                    <label class="form-check-label" for="lx-driver">
+                        Driver
+                    </label>
+                </div>
+                <button class="btn-increment" id="lx-btn-increment" onclick="incrementVehicleQTY(this.id)"><i
+                        class="far fa-plus-square"></i></button>
+                <span class="qty" id="lx-qty">0</span>
+                <button class="btn-decrement" id="lx-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
+                        class="far fa-minus-square"></i></button>
+                <p class="rental-fee" id="lx-rental-fee">Rental Fee: <span>0.00</span></p>
+                <button class="btn-add-to-cart" id="lx-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
+                    <i class="fas fa-cart-plus"></i>
+                </button>
             </div>
 
             <div class="footer-container" id="footer-container"></div>

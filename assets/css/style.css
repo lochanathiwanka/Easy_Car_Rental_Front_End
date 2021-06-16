@@ -366,13 +366,13 @@ header > .cart-popup > .cart-popup-container > .content > div > .qty {
     margin: auto;
 }
 
-header > .cart-popup > .cart-popup-container > .content > div > .car-rental-fee {
+header > .cart-popup > .cart-popup-container > .content > div > .cart-rental-fee {
     bottom: 0;
     left: 20px;
     margin: auto;
 }
 
-header > .cart-popup > .cart-popup-container > .content > div > .car-ldw-fee {
+header > .cart-popup > .cart-popup-container > .content > div > .cart-ldw-fee {
     bottom: 0;
     right: 20px;
     margin: auto;
@@ -384,12 +384,12 @@ header > .cart-popup > .cart-popup-container > .content > div > p > span {
     padding-left: 10px;
 }
 
-header > .cart-popup > .cart-popup-container > .content > div > .car-rental-fee > span {
+header > .cart-popup > .cart-popup-container > .content > div > .cart-rental-fee > span {
     color: #1D741B;
     font-weight: 600;
 }
 
-header > .cart-popup > .cart-popup-container > .content > div > .car-ldw-fee > span {
+header > .cart-popup > .cart-popup-container > .content > div > .cart-ldw-fee > span {
     color: #1D741B;
     font-weight: 600;
 }
@@ -806,7 +806,7 @@ main {
     top: 160px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > .image {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > .registration-image {
     position: absolute;
     width: 350px;
     height: 350px;
@@ -1107,6 +1107,7 @@ main {
 
 .general-car-details-container {
     height: 530px;
+    width: 95%;
     background-color: #f7f7f7;
     box-shadow: 6px 10px 8px 2px #c1c1c1;
 }
@@ -1137,6 +1138,7 @@ main {
 
 .premium-car-details-container {
     height: 530px;
+    width: 95%;
     background-color: #f7f7f7;
     box-shadow: 6px 10px 8px 2px #c1c1c1;
 }
@@ -1169,6 +1171,7 @@ main {
 
 .luxury-car-details-container {
     height: 530px;
+    width: 95%;
     background-color: #f7f7f7;
     box-shadow: 6px 10px 8px 2px #c1c1c1;
 }
@@ -1243,7 +1246,7 @@ main {
 .image {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 80%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1259,6 +1262,15 @@ main {
     background-color: #303045;
     opacity: 0.3;
     border-radius: 10px 10px 10px 10px;
+}
+
+.brand {
+    position: absolute;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    bottom: 0;
+    background-color: #a5a5a5;
 }
 
 p > span {
@@ -1284,7 +1296,7 @@ p > span {
     opacity: 0.3;
 }
 
-.brand {
+.car-brand {
     position: absolute;
     font-family: 'Poppins', sans-serif;
     font-size: 30px;
@@ -1377,11 +1389,57 @@ p > span {
 
 .color {
     position: absolute;
+    display: flex;
+    gap: 15px;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: 500;
     top: 50%;
     left: 40%;
+}
+
+.color > span:not(:nth-child(1)) {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.color > span:not(:nth-child(1)):hover {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    transition: all 0.3s ease-in-out;
+}
+
+.color > .white {
+    color: #E7EDEB;
+}
+
+.color > .white:hover {
+    border: 2px solid #E7EDEB;
+}
+
+.color > .black {
+    color: #1C2520;
+}
+
+.color > .black:hover {
+    border: 2px solid #1C2520;
+}
+
+.color > .red {
+    color: #DB1F48;
+}
+
+.color > .red:hover {
+    border: 2px solid #DB1F48;
+}
+
+.color > .blue {
+    color: #151983;
+}
+
+.color > .blue:hover {
+    border: 2px solid #151983;
 }
 
 .pickup-date-container {
@@ -1418,7 +1476,7 @@ p > span {
     font-size: 18px;
     font-weight: 700;
     top: 40%;
-    right: 0;
+    right: 20px;
 }
 
 .btn-increment {
@@ -1430,11 +1488,16 @@ p > span {
     width: 30px;
     height: 30px;
     top: 90%;
-    left: 40%;
+    left: 48%;
     transition: all 0.3s ease-in-out;
 }
 
-.count {
+.btn-increment:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.qty {
     position: absolute;
     font-size: 18px;
     color: #686767;
@@ -1456,8 +1519,23 @@ p > span {
     width: 30px;
     height: 30px;
     top: 90%;
-    left: 48%;
+    left: 40%;
     transition: all 0.3s ease-in-out;
+}
+
+.btn-decrement:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.rental-fee {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #D01110;
+    font-size: 18px;
+    top: 90%;
+    left: 55%;
 }
 
 .btn-add-to-cart {
@@ -1469,7 +1547,12 @@ p > span {
     width: 30px;
     height: 30px;
     top: 90%;
-    left: 55%;
+    left: 85%;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-add-to-cart:hover {
+    transform: scale(1.2);
     transition: all 0.3s ease-in-out;
 }
 
