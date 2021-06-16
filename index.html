@@ -238,7 +238,7 @@
             <div class="premium-car-details-container" id="premium-car-details-container">
                 <div class="car-image"></div>
                 <p class="car-brand" id="pr-car-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                <p class="category-id" id="pr-category-id">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="category-id" id="pr-category-id">CT-ID:<span>V001</span></p>
                 <p class="transmission-type" id="pr-transmission-type">Transmission:<span>Auto</span></p>
                 <p class="fuel-type" id="pr-fuel-type">Fuel:<span>Diesel</span></p>
                 <p class="no-of-passenger" id="pr-no-of-passenger">No.Passenger:<span>5</span></p>
@@ -257,21 +257,24 @@
                 <span class="left-cars" id="pr-left-cars">20 Left</span>
                 <div class="pickup-date-container mb-3" id="pr-pickup-date-container">
                     <label class="form-label" for="pr-pickup-date">Pickup Date</label>
-                    <input class="pickup-date form-control form-control-sm" id="pr-pickup-date" type="date">
+                    <input class="pickup-date form-control form-control-sm" id="pr-pickup-date"
+                           onchange="setPickupDate(this.id)" type="date">
                 </div>
                 <div class="return-date-container mb-3" id="pr-return-date-container">
                     <label class="form-label" for="pr-return-date">Return Date</label>
-                    <input class="pickup-date form-control form-control-sm" id="pr-return-date" type="date">
+                    <input class="pickup-date form-control form-control-sm" id="pr-return-date"
+                           onchange="setReturnDate(this.id)" type="date">
                 </div>
                 <div class="driver-check-container form-check">
-                    <input class="form-check-input" id="pr-driver" name="driver" type="checkbox" value="">
+                    <input class="form-check-input" id="pr-driver" name="driver"
+                           onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
                     <label class="form-check-label" for="pr-driver">
                         Driver
                     </label>
                 </div>
                 <button class="btn-increment" id="pr-btn-increment" onclick="incrementVehicleQTY(this.id)"><i
                         class="far fa-plus-square"></i></button>
-                <span class="qty" id="pr-qty">0</span>
+                <span class="qty" id="pr-qty">1</span>
                 <button class="btn-decrement" id="pr-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
                         class="far fa-minus-square"></i></button>
                 <p class="rental-fee" id="pr-rental-fee">Rental Fee: <span>0.00</span></p>
@@ -285,7 +288,7 @@
             <div class="luxury-car-details-container" id="luxury-car-details-container">
                 <div class="car-image"></div>
                 <p class="car-brand" id="lx-car-brand">Perodua Bezza Prime Sedan - Auto (2017)</p>
-                <p class="category-id" id="lx-category-id">CT-ID:<span>ABSD2154KL</span></p>
+                <p class="category-id" id="lx-category-id">CT-ID:<span>V001</span></p>
                 <p class="transmission-type" id="lx-transmission-type">Transmission:<span>Auto</span></p>
                 <p class="fuel-type" id="lx-fuel-type">Fuel:<span>Diesel</span></p>
                 <p class="no-of-passenger" id="lx-no-of-passenger">No.Passenger:<span>5</span></p>
@@ -304,21 +307,24 @@
                 <span class="left-cars" id="lx-left-cars">20 Left</span>
                 <div class="pickup-date-container mb-3" id="lx-pickup-date-container">
                     <label class="form-label" for="lx-pickup-date">Pickup Date</label>
-                    <input class="pickup-date form-control form-control-sm" id="lx-pickup-date" type="date">
+                    <input class="pickup-date form-control form-control-sm" id="lx-pickup-date"
+                           onchange="setPickupDate(this.id)" type="date">
                 </div>
                 <div class="return-date-container mb-3" id="lx-return-date-container">
                     <label class="form-label" for="lx-return-date">Return Date</label>
-                    <input class="pickup-date form-control form-control-sm" id="lx-return-date" type="date">
+                    <input class="pickup-date form-control form-control-sm" id="lx-return-date"
+                           onchange="setReturnDate(this.id)" type="date">
                 </div>
                 <div class="driver-check-container form-check">
-                    <input class="form-check-input" id="lx-driver" name="driver" type="checkbox" value="">
+                    <input class="form-check-input" id="lx-driver" name="driver"
+                           onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
                     <label class="form-check-label" for="lx-driver">
                         Driver
                     </label>
                 </div>
                 <button class="btn-increment" id="lx-btn-increment" onclick="incrementVehicleQTY(this.id)"><i
                         class="far fa-plus-square"></i></button>
-                <span class="qty" id="lx-qty">0</span>
+                <span class="qty" id="lx-qty">1</span>
                 <button class="btn-decrement" id="lx-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
                         class="far fa-minus-square"></i></button>
                 <p class="rental-fee" id="lx-rental-fee">Rental Fee: <span>0.00</span></p>
