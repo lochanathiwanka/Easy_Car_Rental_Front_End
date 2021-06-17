@@ -44,14 +44,14 @@
                           onclick="removeNotification(this.id)">
                         <i class="fas fa-minus-circle"></i>
                     </span>
-                    <p><span>Your request is being processed.<br>Thanks for connect with us!</span></p>
+                    <p><span>Your request is being processed. Thanks for connect with us!</span></p>
                 </div>
                 <div class="notification" id="notification2">
                     <span class="btn-remove-notification" id="btn-remove-notification2"
                           onclick="removeNotification(this.id)">
                         <i class="fas fa-minus-circle"></i>
                     </span>
-                    <p><span>Your request is being processed.<br>Thanks for connect with us!</span></p>
+                    <p><span>Your request is being processed. Thanks for connect with us!</span></p>
                 </div>
             </div>
             <div class="footer"></div>
@@ -81,38 +81,40 @@
                     <p class="qty" id="qty2">QTY:<span>1</span></p>
                     <p class="cart-rental-fee" id="cart-rental-fee2">Rental Fee:<span>5000</span></p>
                     <p class="cart-ldw-fee" id="cart-ldw-fee2">LDW Fee:<span>10000</span></p>
-                </div>-->
-                <!--<div class="item" id="item3">
-                    <span onclick="removeItemFromCart(this.id)" class="btn-remove-item" id="btn-remove-item3"><i class="fas fa-minus-circle"></i></span>
-                    <p class="car-brand" id="car-brand3">Item 3</p>
+                </div>
+                <div class="item" id="item3">
+                    <span class="btn-remove-item" id="btn-remove-item3" onclick="removeItemFromCart(this.id)"><i
+                            class="fas fa-minus-circle"></i></span>
+                    <p class="car-brand" id="car-brand3">Item 2</p>
                     <p class="car-ct-id" id="car-ct-id3">CT-ID:<span>ABSD2154KL</span></p>
                     <p class="qty" id="qty3">QTY:<span>1</span></p>
-                    <p class="car-rental-fee" id="car-rental-fee3">Rental Fee:<span>5000</span></p>
-                    <p class="car-ldw-fee" id="car-ldw-fee3">LDW Fee:<span>10000</span></p>
+                    <p class="cart-rental-fee" id="cart-rental-fee3">Rental Fee:<span>5000</span></p>
+                    <p class="cart-ldw-fee" id="cart-ldw-fee3">LDW Fee:<span>10000</span></p>
                 </div>
                 <div class="item" id="item4">
-                    <span onclick="removeItemFromCart(this.id)" class="btn-remove-item" id="btn-remove-item4"><i class="fas fa-minus-circle"></i></span>
-                    <p class="car-brand" id="car-brand4">Item 4</p>
+                    <span class="btn-remove-item" id="btn-remove-item4" onclick="removeItemFromCart(this.id)"><i
+                            class="fas fa-minus-circle"></i></span>
+                    <p class="car-brand" id="car-brand4">Item 2</p>
                     <p class="car-ct-id" id="car-ct-id4">CT-ID:<span>ABSD2154KL</span></p>
                     <p class="qty" id="qty4">QTY:<span>1</span></p>
-                    <p class="car-rental-fee" id="car-rental-fee4">Rental Fee:<span>5000</span></p>
-                    <p class="car-ldw-fee" id="car-ldw-fee4">LDW Fee:<span>10000</span></p>
+                    <p class="cart-rental-fee" id="cart-rental-fee4">Rental Fee:<span>5000</span></p>
+                    <p class="cart-ldw-fee" id="cart-ldw-fee4">LDW Fee:<span>10000</span></p>
                 </div>-->
             </div>
             <div class="total-container">
                 <div>
-                    <p>Total:<span>10000.00</span></p>
+                    <p>Total:<span id="cart_total_rental_fee">10000.00</span></p>
                 </div>
             </div>
             <div class="bank-slip-container">
                 <div class="mb-3">
                     <p>Due to our Privacy & Policies, you should attach<br>your payment proof(bank slip) for further
                         process!</p>
-                    <input class="form-control" id="formFile" type="file">
+                    <input class="form-control" id="bankSlip" type="file">
                 </div>
             </div>
             <div class="button-container2">
-                <button class="btn-proceed" id="btn-proceed"><i class="far fa-check-circle"></i></button>
+                <button class="btn-proceed" id="btn-proceed" type="button"><i class="far fa-check-circle"></i></button>
             </div>
             <div class="footer"></div>
         </div>
@@ -216,11 +218,11 @@
                 <div class="return-date-container mb-3" id="gn-return-date-container">
                     <label class="form-label" for="gn-return-date">Return Date</label>
                     <input class="pickup-date form-control form-control-sm" id="gn-return-date"
-                           onchange="setReturnDate(this.id)" type="date">
+                           disabled onchange="setReturnDate(this.id)" type="date">
                 </div>
                 <div class="driver-check-container form-check">
                     <input class="form-check-input" id="gn-driver" name="driver"
-                           onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
+                           disabled onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
                     <label class="form-check-label" for="gn-driver">
                         Driver
                     </label>
@@ -231,7 +233,7 @@
                 <button class="btn-decrement" id="gn-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
                         class="far fa-minus-square"></i></button>
                 <p class="rental-fee" id="gn-rental-fee">Rental Fee: <span>0.00</span></p>
-                <button class="btn-add-to-cart" id="gn-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
+                <button class="btn-add-to-cart" disabled id="gn-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
                     <i class="fas fa-cart-plus"></i>
                 </button>
             </div>
@@ -266,11 +268,11 @@
                 <div class="return-date-container mb-3" id="pr-return-date-container">
                     <label class="form-label" for="pr-return-date">Return Date</label>
                     <input class="pickup-date form-control form-control-sm" id="pr-return-date"
-                           onchange="setReturnDate(this.id)" type="date">
+                           disabled onchange="setReturnDate(this.id)" type="date">
                 </div>
                 <div class="driver-check-container form-check">
                     <input class="form-check-input" id="pr-driver" name="driver"
-                           onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
+                           disabled onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
                     <label class="form-check-label" for="pr-driver">
                         Driver
                     </label>
@@ -281,7 +283,7 @@
                 <button class="btn-decrement" id="pr-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
                         class="far fa-minus-square"></i></button>
                 <p class="rental-fee" id="pr-rental-fee">Rental Fee: <span>0.00</span></p>
-                <button class="btn-add-to-cart" id="pr-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
+                <button class="btn-add-to-cart" disabled id="pr-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
                     <i class="fas fa-cart-plus"></i>
                 </button>
             </div>
@@ -316,11 +318,11 @@
                 <div class="return-date-container mb-3" id="lx-return-date-container">
                     <label class="form-label" for="lx-return-date">Return Date</label>
                     <input class="pickup-date form-control form-control-sm" id="lx-return-date"
-                           onchange="setReturnDate(this.id)" type="date">
+                           disabled onchange="setReturnDate(this.id)" type="date">
                 </div>
                 <div class="driver-check-container form-check">
                     <input class="form-check-input" id="lx-driver" name="driver"
-                           onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
+                           disabled onclick="driverCheckboxOnClick(this.id)" type="checkbox" value="">
                     <label class="form-check-label" for="lx-driver">
                         Driver
                     </label>
@@ -331,7 +333,7 @@
                 <button class="btn-decrement" id="lx-btn-decrement" onclick="decrementVehicleQTY(this.id)"><i
                         class="far fa-minus-square"></i></button>
                 <p class="rental-fee" id="lx-rental-fee">Rental Fee: <span>0.00</span></p>
-                <button class="btn-add-to-cart" id="lx-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
+                <button class="btn-add-to-cart" disabled id="lx-btn-add-to-cart" onclick="addVehicleToCart(this.id)">
                     <i class="fas fa-cart-plus"></i>
                 </button>
             </div>

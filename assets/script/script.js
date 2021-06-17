@@ -17,6 +17,7 @@ let images = [
     "https://i.ibb.co/Ph5K8zS/car4.jpg"
 ];
 let x = 0;
+
 function nextBackground() {
     $("#home").css("background-image", "url(" + images[x] + ")");
     x = x + 1;
@@ -240,9 +241,20 @@ $("#profile-popup").click(function (e) {
 
 //remove item form cart
 let cart_items_count = 0;
+
 function removeItemFromCart(id) {
+    //get parent id
     let parent_item = $(`#${id}`).closest('div').attr('id');
+
+    //get index number of the item div
+    let index = $(`#${parent_item}`).index();
+
+    //remove item from the booking details list
+    request_details_list.splice(index, 1);
+
+    //remove item from the cart
     $(`#${parent_item}`).remove();
+
 
     cart_items_count -= 1;
     if (cart_items_count === 0) {
@@ -392,6 +404,15 @@ function setPickupDate(id) {
     //get return date
     let return_date = new Date($(`#${return_date_id}`).val());
 
+    //enable return date
+    $(`#${return_date_id}`).prop("disabled", false);
+
+    //enable driver checkbox
+    $(`#${parent}`).children('div').eq(4).children('input').eq(0).prop("disabled", false);
+
+    //enable add to cart button
+    $(`#${parent}`).children('button').eq(2).prop('disabled', false);
+
     let date_diff_in_time;
     let date_diff_in_days;
     //check if return date is empty or not
@@ -413,8 +434,36 @@ function setPickupDate(id) {
     //get exist rental fee
     let old_rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
 
+    /* //calculate new rental fee
+     let new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+
+     //check if driver is selected or not and then add proper values to new rental fee
+     let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
+     if (is_driver_checked) {
+         if (new_rental_fee > 0) {
+             //set new rental fee with driver's charge
+             $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee + 1000) + ".00");
+         } else {
+             alert('Date difference is not a valid one..Enter a valid Date!');
+         }
+     } else {
+         if (new_rental_fee > 0) {
+             //set new rental fee without with driver's charge
+             $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee) + ".00");
+         } else {
+             alert('Date difference is not a valid one..Enter a valid Date!');
+         }
+     }*/
+
     //calculate new rental fee
-    let new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+    let new_rental_fee;
+    if (date_diff_in_days > 0) {
+        new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+    } else if (date_diff_in_days === 0) {
+        new_rental_fee = (daily_rate_fee * qty);
+    } else {
+        new_rental_fee = 0;
+    }
 
     //check if driver is selected or not and then add proper values to new rental fee
     let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
@@ -423,16 +472,23 @@ function setPickupDate(id) {
             //set new rental fee with driver's charge
             $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee + 1000) + ".00");
         } else {
-            alert('Date difference is not a valid one..Enter a valid Date!');
+            alert('Pickup date is greater than Return date..please check it again!');
+            //reset return date
+            document.getElementById(`${id}`).valueAsDate = null;
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(daily_rate_fee);
         }
     } else {
         if (new_rental_fee > 0) {
             //set new rental fee without with driver's charge
             $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee) + ".00");
         } else {
-            alert('Date difference is not a valid one..Enter a valid Date!');
+            alert('Pickup date is greater than Return date..please check it again!');
+            //reset return date
+            document.getElementById(`${id}`).valueAsDate = null;
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(daily_rate_fee);
         }
     }
+
 }
 
 function setReturnDate(id) {
@@ -468,7 +524,14 @@ function setReturnDate(id) {
     let old_rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
 
     //calculate new rental fee
-    let new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+    let new_rental_fee;
+    if (date_diff_in_days > 0) {
+        new_rental_fee = (daily_rate_fee * date_diff_in_days * qty);
+    } else if (date_diff_in_days === 0) {
+        new_rental_fee = (daily_rate_fee * qty);
+    } else {
+        new_rental_fee = 0;
+    }
 
     //check if driver is selected or not and then add proper values to new rental fee
     let is_driver_checked = $(`#${parent}`).children('div').eq(4).children('input').eq(0).is(":checked");
@@ -477,26 +540,31 @@ function setReturnDate(id) {
             //set new rental fee with driver's charge
             $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee + 1000) + ".00");
         } else {
-            alert('Date difference is not a valid one..Enter a valid Date!');
+            alert('Return date is smaller than Pickup date..please check it again!');
+            //reset return date
+            document.getElementById(`${id}`).valueAsDate = null;
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(daily_rate_fee);
         }
     } else {
         if (new_rental_fee > 0) {
             //set new rental fee without with driver's charge
             $(`#${parent}`).children('p').eq(10).children('span').eq(0).text((new_rental_fee) + ".00");
         } else {
-            alert('Date difference is not a valid one..Enter a valid Date!');
+            alert('Return date is smaller than Pickup date..please check it again!');
+            //reset return date
+            document.getElementById(`${id}`).valueAsDate = null;
+            $(`#${parent}`).children('p').eq(10).children('span').eq(0).text(daily_rate_fee);
         }
     }
-
 }
 
 //add vehicle to cart
-let booking_details_list = [];
+let request_details_list = [];
 function addVehicleToCart(id) {
     //get parent container id
     let parent = $(`#${id}`).closest('div').attr('id');
 
-    /*//get pickup date id
+    //get pickup date id
     let pickup_date_id = $(`#${parent}`).children('div').eq(2).children('input').eq(0).attr('id');
     //get return date id
     let return_date_id = $(`#${parent}`).children('div').eq(3).children('input').eq(0).attr('id');
@@ -507,12 +575,29 @@ function addVehicleToCart(id) {
     // To calculate the time difference of two dates
     let date_diff_in_time = return_date.getTime() - pickup_date.getTime();
     // To calculate the no. of days between two dates
-    let date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);*/
+    let date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
 
-    /*    //check "Driver" checkbox is clicked or not
-        let driver_checkbox_id = $(`#${parent}`).children('div').eq(4).children('input').eq(0).attr('id');
-        let driver = $(`#${driver_checkbox_id}`).is(":checked") ? 'yes' : 'no';
-        let driver_charge = $(`#${driver_checkbox_id}`).is(":checked") ? 1000.00 : 0;*/
+    let new_pickup_date;
+    let new_retuen_date;
+    if (isNaN(return_date.getTime())) {
+        //pickup date & return date both are same
+        new_pickup_date = pickup_date;
+        new_retuen_date = pickup_date;
+    } else {
+        if (date_diff_in_days > 0) {
+            //pickup date & return date both are good
+            new_pickup_date = pickup_date;
+            new_retuen_date = return_date;
+        } else {
+            //pickup date & return date both are same
+            new_pickup_date = pickup_date;
+            new_retuen_date = pickup_date;
+        }
+    }
+
+    //check "Driver" checkbox is clicked or not
+    let driver_checkbox_id = $(`#${parent}`).children('div').eq(4).children('input').eq(0).attr('id');
+    let driver = $(`#${driver_checkbox_id}`).is(":checked") ? 'yes' : 'no';
 
     let isUserLogged = checkIsUserLogged();
     if (isUserLogged) {
@@ -521,6 +606,7 @@ function addVehicleToCart(id) {
         let qty = parseInt($(`#${parent}`).children('span').eq(1).text());
         let ldw_fee = parseFloat($(`#${parent}`).children('p').eq(7).children('span').eq(0).text());
         let rental_fee = parseFloat($(`#${parent}`).children('p').eq(10).children('span').eq(0).text());
+
 
         if (rental_fee !== 0) {
             if (cart_items_count < 3) {
@@ -542,15 +628,40 @@ function addVehicleToCart(id) {
                 cart_items_count += 1;
 
                 //add booking details into array list
-                booking_details_list.push({
-                    rid: 'R001',
-                    cid: 'C001',
-
+                request_details_list.push({
+                    pk: {
+                        'rid': request_id,
+                        'vid': 'V001'
+                    },
+                    qty: qty,
+                    driver: driver,
+                    pickup_date: new_pickup_date.toLocaleDateString(),
+                    return_date: new_retuen_date.toLocaleDateString(),
+                    rental_fee: rental_fee,
+                    ldw_fee: ldw_fee
                 });
 
                 alert('Your vehicle is added to the cart!');
                 $('#cart-item-count').css('display', 'flex');
                 $('#cart-item-count').text(cart_items_count);
+
+                //reset pickup date
+                document.getElementById(`${pickup_date_id}`).valueAsDate = null;
+                //reset return date
+                document.getElementById(`${return_date_id}`).valueAsDate = null;
+                //disable return date
+                $(`#${return_date_id}`).prop("disabled", true);
+                //disable driver checkbox
+                $(`#${parent}`).children('div').eq(4).children('input').eq(0).prop("disabled", true);
+                //uncheck driver checkbox
+                $(`#${driver_checkbox_id}`).prop('checked', false);
+                //disable add to cart button
+                $(`#${parent}`).children('button').eq(2).prop('disabled', true);
+                //reset qty
+                $(`#${parent}`).children('span').eq(1).text(1);
+                //rest rental fee
+                $(`#${parent}`).children('p').eq(10).children('span').eq(0).text('0.00');
+
             } else {
                 alert('You have already reached the maximum number limit of items per one booking!');
             }
@@ -615,4 +726,84 @@ $('.blue').click(function () {
     color = 'blue';
 });
 
+//add booking
+let request;
+$('#btn-proceed').click(function () {
+    //get cart items count
+    let count = $("#cart-items-container").children().length;
 
+    //get user id;
+    let user_id = $('#user-id').text();
+
+    //get cart total rental fee
+    let total_rental_fee = parseFloat($('#cart_total_rental_fee').text());
+
+
+    try {
+        //get bank slip image
+        let fileObject = $("#bankSlip")[0].files[0];//access file object from input field
+        let fileName = $("#bankSlip")[0].files[0].name; //get file name
+
+        let bank_slip = new FormData(); //setup form data object to send file data
+        bank_slip.append("bankSlip", fileObject, fileName); //append data
+
+        //add request data & request details list's data into the request_list
+        request = {
+            rid: request_id,
+            customer: {
+                id: user_id
+            },
+            total_fee: total_rental_fee,
+            bank_slip: fileName,
+            message: 'Your request is being processed. Thanks for connect with us!',
+            status: 'show',
+            request_detail_list: request_details_list
+        };
+
+
+        $.ajax({
+            url: 'http://localhost:8080/Easy_Car_Rental_Server/request',
+            method: 'post',
+            async: true,
+            contentType: 'application/json',
+            data: JSON.stringify(request),
+            success: function (response) {
+                alert(response.message);
+                generateRequestID();
+            }
+        });
+
+    } catch (e) {
+        alert('Upload a bank slip image!');
+    }
+
+});
+
+let request_id;
+
+function generateRequestID() {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/request/lastrid',
+        method: 'get',
+        async: true,
+        dataType: 'json',
+        success: function (response) {
+            try {
+                let last_rid = response.data;
+                let newId = parseInt(last_rid.substring(1, 4)) + 1;
+                if (newId < 10) {
+                    request_id = "R00" + newId;
+                } else if (newId < 100) {
+                    request_id = "R0" + newId;
+                } else {
+                    request_id = "R" + newId;
+                }
+
+            } catch (e) {
+                request_id = "R001";
+            }
+        }
+    });
+}
+
+generateRequestID();

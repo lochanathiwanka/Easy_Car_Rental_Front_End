@@ -228,7 +228,8 @@ header > .cart-popup {
     display: none;
     z-index: 2;
     width: 350px;
-    min-height: 80px;
+    height: 450px;
+    overflow-x: auto;
     right: 150px;
     top: 55px;
     border-radius: 4px;
@@ -276,14 +277,13 @@ header > .cart-popup > .cart-popup-container > .button-container1 > button:hover
     transition: all 0.3s ease-in-out;
 }
 
-header > .cart-popup > .cart-popup-container > .content > div {
+header > .cart-popup > .cart-popup-container > .content > .item {
     position: relative;
     width: 95%;
     height: 120px;
     border: 2px solid #e3e2e2;
     left: 0;
     right: 0;
-    top: 10px;
     margin: auto;
     transition: all 0.3s ease-in-out;
 }
