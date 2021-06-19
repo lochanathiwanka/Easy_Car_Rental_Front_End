@@ -10,13 +10,204 @@ $(document).ready(function () {
 });
 
 //load home background images
-let images = [
+/*let images = [
     "https://i.ibb.co/6gG9W4K/car1.jpg",
     "https://i.ibb.co/SQdxKSF/car2.jpg",
     "https://i.ibb.co/GM5RHcS/car3.jpg",
     "https://i.ibb.co/Ph5K8zS/car4.jpg"
 ];
 let x = 0;
+function nextBackground() {
+    $("#home").css("background-image", "url(" + images[x] + ")");
+    x = x + 1;
+    if (x === images.length) {
+        x = 0;
+    }
+}
+setInterval(nextBackground, 8000);*/
+let images = [];
+let x = 0;
+
+function getImage1() {
+    $.ajax({
+        type: "GET",
+        url: `https://i.ibb.co/6gG9W4K/car1.jpg`,
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        success: function (result, textStatus, jqXHR) {
+            if (result.length < 1) {
+                alert("The thumbnail doesn't exist");
+                $("#thumbnail").attr("src", "data:image/png;base64,");
+                return
+            }
+
+            let binary = "";
+            let responseText = jqXHR.responseText;
+            let responseTextLen = responseText.length;
+
+            for (i = 0; i < responseTextLen; i++) {
+                binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+            }
+            $("#thumbnail").attr("src", "data:image/png;base64,");
+
+            /* PUT THIS INSIDE AJAX SUCCESS */
+            /*let img = $('<img id="image_id">');
+            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
+            img.appendTo('#image_div');*/
+
+            //set image's src to the div
+            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
+            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
+
+            images.push('data:image/jpg;base64,' + btoa(binary));
+            /*x = x + 1;
+            if (x === images.length) {
+                x = 0;
+            }*/
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error in getting document " + textStatus);
+        }
+    });
+}
+
+function getImage2() {
+    $.ajax({
+        type: "GET",
+        url: `https://i.ibb.co/SQdxKSF/car2.jpg`,
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        success: function (result, textStatus, jqXHR) {
+            if (result.length < 1) {
+                alert("The thumbnail doesn't exist");
+                $("#thumbnail").attr("src", "data:image/png;base64,");
+                return
+            }
+
+            let binary = "";
+            let responseText = jqXHR.responseText;
+            let responseTextLen = responseText.length;
+
+            for (i = 0; i < responseTextLen; i++) {
+                binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+            }
+            $("#thumbnail").attr("src", "data:image/png;base64,");
+
+            /* PUT THIS INSIDE AJAX SUCCESS */
+            /*let img = $('<img id="image_id">');
+            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
+            img.appendTo('#image_div');*/
+
+            //set image's src to the div
+            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
+            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
+
+            images.push('data:image/jpg;base64,' + btoa(binary));
+            /*x = x + 1;
+            if (x === images.length) {
+                x = 0;
+            }*/
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error in getting document " + textStatus);
+        }
+    });
+}
+
+function getImage3() {
+    $.ajax({
+        type: "GET",
+        url: `https://i.ibb.co/GM5RHcS/car3.jpg`,
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        success: function (result, textStatus, jqXHR) {
+            if (result.length < 1) {
+                alert("The thumbnail doesn't exist");
+                $("#thumbnail").attr("src", "data:image/png;base64,");
+                return
+            }
+
+            let binary = "";
+            let responseText = jqXHR.responseText;
+            let responseTextLen = responseText.length;
+
+            for (i = 0; i < responseTextLen; i++) {
+                binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+            }
+            $("#thumbnail").attr("src", "data:image/png;base64,");
+
+            /* PUT THIS INSIDE AJAX SUCCESS */
+            /*let img = $('<img id="image_id">');
+            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
+            img.appendTo('#image_div');*/
+
+            //set image's src to the div
+            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
+            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
+
+            images.push('data:image/jpg;base64,' + btoa(binary));
+            /*x = x + 1;
+            if (x === images.length) {
+                x = 0;
+            }*/
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error in getting document " + textStatus);
+        }
+    });
+}
+
+function getImage4() {
+    $.ajax({
+        type: "GET",
+        url: `https://i.ibb.co/Ph5K8zS/car4.jpg`,
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        success: function (result, textStatus, jqXHR) {
+            if (result.length < 1) {
+                alert("The thumbnail doesn't exist");
+                $("#thumbnail").attr("src", "data:image/png;base64,");
+                return
+            }
+
+            let binary = "";
+            let responseText = jqXHR.responseText;
+            let responseTextLen = responseText.length;
+
+            for (i = 0; i < responseTextLen; i++) {
+                binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+            }
+            $("#thumbnail").attr("src", "data:image/png;base64,");
+
+            /* PUT THIS INSIDE AJAX SUCCESS */
+            /*let img = $('<img id="image_id">');
+            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
+            img.appendTo('#image_div');*/
+
+            //set image's src to the div
+            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
+            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
+
+            images.push('data:image/jpg;base64,' + btoa(binary));
+            /*x = x + 1;
+            if (x === images.length) {
+                x = 0;
+            }*/
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error in getting document " + textStatus);
+        }
+    });
+}
+
+getImage1();
+getImage2();
+getImage3();
+getImage4();
 
 function nextBackground() {
     $("#home").css("background-image", "url(" + images[x] + ")");
@@ -27,6 +218,87 @@ function nextBackground() {
 }
 
 setInterval(nextBackground, 8000);
+
+/*------------------------------------------------------------------------------------------*/
+
+//get all vehicles
+let vehicle_list = [];
+
+function loadAllVehicles() {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/vehicle',
+        method: 'get',
+        async: true,
+        dataType: "json",
+        success: function (response) {
+            console.log(response.data);
+
+            vehicle_list = response.data;
+
+            $('#luxury-cars-category').empty();
+
+            for (let i = 0; i < vehicle_list.length; i++) {
+                //load luxury cars
+                if (vehicle_list[i].type.toLowerCase() === 'luxury') {
+                    $('#luxury-cars-category').append(
+                        `
+                        <div id="general-car${i + 1}">
+                            <div class="image" id="gn-image${i + 1}"></div>
+                            <p class="brand" id="gn-brand${i + 1}">${vehicle_list[i].brand}</p>
+                        </div>
+                        `
+                    );
+
+                    //load luxury car's images
+                    for (let j = 0; j < 1; j++) {
+                        console.log(vehicle_list[i].vehicleDetailList[0].image1);
+                        $('#gn-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
+                    }
+                }
+            }
+        }
+    });
+}
+
+loadAllVehicles();
+
+//get vehicle's image from the server
+function getVehicleImage(image_name) {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/Easy_Car_Rental_Server/vehicle",
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        success: function (result, textStatus, jqXHR) {
+            if (result.length < 1) {
+                alert("The thumbnail doesn't exist");
+                $("#thumbnail").attr("src", "data:image/png;base64,");
+                return
+            }
+
+            let binary = "";
+            let responseText = jqXHR.responseText;
+            let responseTextLen = responseText.length;
+
+            for (i = 0; i < responseTextLen; i++) {
+                binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+            }
+            $("#thumbnail").attr("src", "data:image/png;base64,");
+
+            /* PUT THIS INSIDE AJAX SUCCESS */
+            /*let img = $('<img id="image_id">');
+            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
+            img.appendTo('#image_div');*/
+
+            //set image's src to the div
+            $('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error in getting document " + textStatus);
+        }
+    });
+}
 
 
 //password see change
@@ -103,26 +375,6 @@ for (let i = 0; i < 5; i++) {
         <div id="general-car${i + 1}">
             <div class="image" id="gn-image${i + 1}"></div>
             <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-         <!--   <p class="category-id" id="gn-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
-            <p class="transmission-type" id="gn-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
-            <p class="fuel-type" id="gn-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
-            <p class="no-of-passenger" id="gn-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
-            <p class="daily-rate" id="gn-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
-            <p class="monthly-rate" id="gn-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
-            <p class="free-mileage-price" id="gn-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
-            <p class="extra-km-price" id="gn-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
-            <div class="color" id="gn-color${i + 1}">
-                <span>Color:</span>
-                <span class="white" id="gn-white${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="black" id="gn-black${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="red" id="gn-red${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="blue" id="gn-blue${i + 1}"><i class="fas fa-circle"></i></span>
-            </div>
-            <span class="left-cars" id="gn-left-cars${i + 1}">20 Left</span>
-            <button class="btn-increment" id="gn-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-            <span class="count" id="gn-count${i + 1}">0</span>
-            <button class="btn-decrement" id="gn-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-            <button class="btn-add-to-cart" id="gn-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i class="fas fa-cart-plus"></i></button> -->
         </div>
         `
     );
@@ -164,7 +416,7 @@ for (let i = 0; i < 4; i++) {
 }
 
 //luxury vehicles loading
-$('#luxury-cars-category').empty();
+/*$('#luxury-cars-category').empty();
 for (let i = 0; i < 3; i++) {
     $('#luxury-cars-category').append(
         `
@@ -195,7 +447,7 @@ for (let i = 0; i < 3; i++) {
         `
     );
     $('#lx-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
-}
+}*/
 
 
 //Notification, Cart, Profile popup views open & close
@@ -241,13 +493,17 @@ $("#profile-popup").click(function (e) {
 
 //remove item form cart
 let cart_items_count = 0;
-
 function removeItemFromCart(id) {
     //get parent id
     let parent_item = $(`#${id}`).closest('div').attr('id');
 
     //get index number of the item div
     let index = $(`#${parent_item}`).index();
+
+    //set cart total rental fee
+    let old_value = parseFloat($('#cart_total_rental_fee').text());
+    let deleted_value = parseFloat($(`#${parent_item}`).children('p').eq(3).children('span').eq(0).text());
+    $('#cart_total_rental_fee').text((old_value - deleted_value) + ".00");
 
     //remove item from the booking details list
     request_details_list.splice(index, 1);
@@ -578,20 +834,20 @@ function addVehicleToCart(id) {
     let date_diff_in_days = date_diff_in_time / (1000 * 3600 * 24);
 
     let new_pickup_date;
-    let new_retuen_date;
+    let new_return_date;
     if (isNaN(return_date.getTime())) {
         //pickup date & return date both are same
         new_pickup_date = pickup_date;
-        new_retuen_date = pickup_date;
+        new_return_date = pickup_date;
     } else {
         if (date_diff_in_days > 0) {
             //pickup date & return date both are good
             new_pickup_date = pickup_date;
-            new_retuen_date = return_date;
+            new_return_date = return_date;
         } else {
             //pickup date & return date both are same
             new_pickup_date = pickup_date;
-            new_retuen_date = pickup_date;
+            new_return_date = pickup_date;
         }
     }
 
@@ -625,6 +881,10 @@ function addVehicleToCart(id) {
                 `
                 );
 
+                //set cart total rental fee
+                let old_value = parseFloat($('#cart_total_rental_fee').text());
+                $('#cart_total_rental_fee').text((old_value + rental_fee) + ".00");
+
                 cart_items_count += 1;
 
                 //add booking details into array list
@@ -636,7 +896,7 @@ function addVehicleToCart(id) {
                     qty: qty,
                     driver: driver,
                     pickup_date: new_pickup_date.toLocaleDateString(),
-                    return_date: new_retuen_date.toLocaleDateString(),
+                    return_date: new_return_date.toLocaleDateString(),
                     rental_fee: rental_fee,
                     ldw_fee: ldw_fee
                 });
@@ -742,10 +1002,8 @@ $('#btn-proceed').click(function () {
     try {
         //get bank slip image
         let fileObject = $("#bankSlip")[0].files[0];//access file object from input field
-        let fileName = $("#bankSlip")[0].files[0].name; //get file name
+        let fileName = user_id + "-" + $("#bankSlip")[0].files[0].name; //get file name
 
-        let bank_slip = new FormData(); //setup form data object to send file data
-        bank_slip.append("bankSlip", fileObject, fileName); //append data
 
         //add request data & request details list's data into the request_list
         request = {
@@ -755,7 +1013,7 @@ $('#btn-proceed').click(function () {
             },
             total_fee: total_rental_fee,
             bank_slip: fileName,
-            message: 'Your request is being processed. Thanks for connect with us!',
+            message: 'Your request is being processed. Thanks for connecting with us!',
             status: 'show',
             request_detail_list: request_details_list
         };
@@ -768,6 +1026,7 @@ $('#btn-proceed').click(function () {
             contentType: 'application/json',
             data: JSON.stringify(request),
             success: function (response) {
+                uploadBankSlip(fileObject, fileName)
                 alert(response.message);
                 generateRequestID();
             }
@@ -776,9 +1035,28 @@ $('#btn-proceed').click(function () {
     } catch (e) {
         alert('Upload a bank slip image!');
     }
-
 });
 
+
+//upload bank slip
+function uploadBankSlip(image, fileName) {
+    let bank_slip = new FormData(); //setup form data object to send file data
+    bank_slip.append("bankSlip", image, fileName); //append data
+
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/request/upload_bank_slip',
+        method: 'post',
+        async: true,
+        processData: false,
+        contentType: false,
+        data: bank_slip,
+        success: function (response) {
+        }
+    });
+}
+
+
+//generate RID
 let request_id;
 
 function generateRequestID() {
@@ -807,3 +1085,30 @@ function generateRequestID() {
 }
 
 generateRequestID();
+
+
+$('#btn-sign-in').click(function () {
+    //get email
+    let email = $('#txtEmail').val();
+    //get password
+    let password = $('#password').val();
+
+    window.location.replace('https://lochanathiwanka.github.io/Easy_Car_Rental_Admin_Dashboard/');
+
+
+    /*    $.ajax({
+            url: 'http://localhost:8080/Easy_Car_Rental_Server/login',
+            method: 'get',
+            async: true,
+            data: {
+                email: email,
+                password: password
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.data.role === 'admin') {
+                    window.location.replace('https://lochanathiwanka.github.io/Easy_Car_Rental_Admin_Dashboard/');
+                }
+            }
+        });*/
+});
