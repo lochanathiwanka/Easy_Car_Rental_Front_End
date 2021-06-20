@@ -221,6 +221,8 @@ setInterval(nextBackground, 8000);
 
 /*------------------------------------------------------------------------------------------*/
 
+//Vehicles section
+//-----------------------Vehicle view--------------------
 //get all vehicles
 let vehicle_list = [];
 
@@ -231,30 +233,116 @@ function loadAllVehicles() {
         async: true,
         dataType: "json",
         success: function (response) {
-            console.log(response.data);
-
             vehicle_list = response.data;
-
             $('#luxury-cars-category').empty();
-
             for (let i = 0; i < vehicle_list.length; i++) {
+                //load general cars
+                if (vehicle_list[i].type.toLowerCase() === 'general') {
+                    $('#general-cars-category').append(
+                        `
+                        <div id="general-car${i}" onclick="carDivOnClick(this.id)">
+                            <div class="image" id="gn-image${i}"></div>
+                            <p class="brand" id="general-brand${i}">${vehicle_list[i].brand}</p>
+                        </div>
+                        `
+                    );
+                    //load general car's images
+                    setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'gn-image', (i));
+                }
+
+                //load luxury cars
+                if (vehicle_list[i].type.toLowerCase() === 'premium') {
+                    $('#premium-cars-category').append(
+                        `
+                        <div id="premium-car${i}" onclick="carDivOnClick(this.id)">
+                            <div class="image" id="pr-image${i}"></div>
+                            <p class="brand" id="premium-brand${i}">${vehicle_list[i].brand}</p>
+                        </div>
+                        `
+                    );
+                    //load premium car's images
+                    setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'pr-image', (i));
+                }
+
                 //load luxury cars
                 if (vehicle_list[i].type.toLowerCase() === 'luxury') {
                     $('#luxury-cars-category').append(
                         `
-                        <div id="general-car${i + 1}">
-                            <div class="image" id="gn-image${i + 1}"></div>
-                            <p class="brand" id="gn-brand${i + 1}">${vehicle_list[i].brand}</p>
+                        <div id="luxury-car${i}" onclick="carDivOnClick(this.id)">
+                            <div class="image" id="lx-image${i}"></div>
+                            <p class="brand" id="luxury-brand${i}">${vehicle_list[i].brand}</p>
                         </div>
                         `
                     );
-
                     //load luxury car's images
-                    for (let j = 0; j < 1; j++) {
-                        console.log(vehicle_list[i].vehicleDetailList[0].image1);
-                        $('#gn-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
+                    setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'lx-image', (i));
+                }
+            }
+
+            //check if general cars category is not empty & then set general car details container image
+            if ($('#general-cars-category').children().length > 0) {
+                $('#general-cars-title-container').css('display', 'grid');
+                $('#general-cars-category').css('display', 'grid');
+                $('#general-car-details-container').css('display', 'grid');
+
+                for (let i = 0; i < vehicle_list.length; i++) {
+                    if (vehicle_list[i].type.toLowerCase() === 'general') {
+                        resetVehicleDetailContainerValues('general-car-details-container', 'gn');
+                        let image_details = [vehicle_list[i].vehicleDetailList[0].image1, 'gn-car-image'];
+                        setVehicleDetailsContainerValues('gn', image_details, vehicle_list[i].brand, vehicle_list[i].vid, vehicle_list[i].transmission_type,
+                            vehicle_list[i].fuel_type, vehicle_list[i].no_of_passenger, vehicle_list[i].daily_rate, vehicle_list[i].monthly_rate,
+                            vehicle_list[i].ldw_fee, vehicle_list[i].free_mileage, vehicle_list[i].extra_km_price, vehicle_list[i].vehicleDetailList.length);
+                        break;
                     }
                 }
+            } else {
+                $('#general-cars-title-container').css('display', 'none');
+                $('#general-cars-category').css('display', 'none');
+                $('#general-car-details-container').css('display', 'none');
+            }
+
+            //check if premium cars category is not empty & then set premium car details container image
+            if ($('#premium-cars-category').children().length > 0) {
+                $('#premium-cars-title-container').css('display', 'grid');
+                $('#premium-cars-category').css('display', 'grid');
+                $('#premium-car-details-container').css('display', 'grid');
+
+                for (let i = 0; i < vehicle_list.length; i++) {
+                    if (vehicle_list[i].type.toLowerCase() === 'premium') {
+                        resetVehicleDetailContainerValues('premium-car-details-container', 'pr');
+                        let image_details = [vehicle_list[i].vehicleDetailList[0].image1, 'pr-car-image'];
+                        setVehicleDetailsContainerValues('pr', image_details, vehicle_list[i].brand, vehicle_list[i].vid, vehicle_list[i].transmission_type,
+                            vehicle_list[i].fuel_type, vehicle_list[i].no_of_passenger, vehicle_list[i].daily_rate, vehicle_list[i].monthly_rate,
+                            vehicle_list[i].ldw_fee, vehicle_list[i].free_mileage, vehicle_list[i].extra_km_price, vehicle_list[i].vehicleDetailList.length);
+                        break;
+                    }
+                }
+            } else {
+                $('#premium-cars-title-container').css('display', 'none');
+                $('#premium-cars-category').css('display', 'none');
+                $('#premium-car-details-container').css('display', 'none');
+            }
+
+            //check if luxury cars category is not empty & then set luxury car details container image
+            if ($('#luxury-cars-category').children().length > 0) {
+                for (let i = 0; i < vehicle_list.length; i++) {
+                    $('#luxury-cars-title-container').css('display', 'grid');
+                    $('#luxury-cars-category').css('display', 'grid');
+                    $('#luxury-car-details-container').css('display', 'grid');
+
+                    if (vehicle_list[i].type.toLowerCase() === 'luxury') {
+                        resetVehicleDetailContainerValues('luxury-car-details-container', 'lx');
+                        let image_details = [vehicle_list[i].vehicleDetailList[0].image1, 'lx-car-image'];
+                        setVehicleDetailsContainerValues('lx', image_details, vehicle_list[i].brand, vehicle_list[i].vid, vehicle_list[i].transmission_type,
+                            vehicle_list[i].fuel_type, vehicle_list[i].no_of_passenger, vehicle_list[i].daily_rate, vehicle_list[i].monthly_rate,
+                            vehicle_list[i].ldw_fee, vehicle_list[i].free_mileage, vehicle_list[i].extra_km_price, vehicle_list[i].vehicleDetailList.length);
+                        break;
+                    }
+                }
+            } else {
+                $('#luxury-cars-title-container').css('display', 'none');
+                $('#luxury-cars-category').css('display', 'none');
+                $('#luxury-car-details-container').css('display', 'none');
             }
         }
     });
@@ -262,11 +350,11 @@ function loadAllVehicles() {
 
 loadAllVehicles();
 
-//get vehicle's image from the server
-function getVehicleImage(image_name) {
+//get vehicle's image from the server and set it to vehicle div
+function setVehicleImage(image, div, div_index) {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/Easy_Car_Rental_Server/vehicle",
+        url: "http://localhost:8080/Easy_Car_Rental_Server/vehicle_detail/get_images/" + image,
         beforeSend: function (xhr) {
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
         },
@@ -286,19 +374,147 @@ function getVehicleImage(image_name) {
             }
             $("#thumbnail").attr("src", "data:image/png;base64,");
 
-            /* PUT THIS INSIDE AJAX SUCCESS */
-            /*let img = $('<img id="image_id">');
-            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
-            img.appendTo('#image_div');*/
-
-            //set image's src to the div
-            $('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));
+            //set image's url to the div
+            let image_url = 'data:image/jpg;base64,' + btoa(binary);
+            $(`#${div}${div_index}`).css('background-image', `url("${image_url}")`);
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error in getting document " + textStatus);
         }
     });
 }
+
+//load vehicle details container values
+function setVehicleDetailsContainerValues(id, image_details, brand, vid, transmission_type, fuel_type, no_of_passenger, daily_rate, monthly_rate, ldw_fee, free_mileage, extra_km_price, length) {
+    setVehicleDetailsContainerImage(image_details[0], image_details[1]);
+    $(`#${id}-car-brand`).text(brand);
+    $(`#${id}-category-id`).children('span').eq(0).text(vid);
+    $(`#${id}-transmission-type`).children('span').eq(0).text(transmission_type);
+    $(`#${id}-fuel-type`).children('span').eq(0).text(fuel_type);
+    $(`#${id}-no-of-passenger`).children('span').eq(0).text(no_of_passenger);
+    $(`#${id}-daily-rate`).children('span').eq(0).text(daily_rate + ".00");
+    $(`#${id}-monthly-rate`).children('span').eq(0).text(monthly_rate + ".00");
+    $(`#${id}-ldw-fee`).children('span').eq(0).text(ldw_fee + ".00");
+    $(`#${id}-free-mileage`).children('span').eq(0).text(free_mileage);
+    $(`#${id}-extra-km-price`).children('span').eq(0).text(extra_km_price + ".00 per KM");
+    $(`#${id}-left-cars`).text(length + " Left");
+}
+
+//vehicle details container image set
+function setVehicleDetailsContainerImage(image, image_div) {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/Easy_Car_Rental_Server/vehicle_detail/get_images/" + image,
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        success: function (result, textStatus, jqXHR) {
+            if (result.length < 1) {
+                alert("The thumbnail doesn't exist");
+                $("#thumbnail").attr("src", "data:image/png;base64,");
+                return
+            }
+
+            let binary = "";
+            let responseText = jqXHR.responseText;
+            let responseTextLen = responseText.length;
+
+            for (i = 0; i < responseTextLen; i++) {
+                binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+            }
+            $("#thumbnail").attr("src", "data:image/png;base64,");
+
+            //set image's url to the div
+            let image_url = 'data:image/jpg;base64,' + btoa(binary);
+            $(`#${image_div}`).css('background-image', `url("${image_url}")`);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error in getting document " + textStatus);
+        }
+    });
+}
+
+//car div on click
+function carDivOnClick(id) {
+    //split vehicle div id
+    let split = id.split('-');
+
+    //get vehicle div's brand
+    let brand = $(`#${id}`).children('p').eq(0).text();
+
+    for (let i = 0; i < vehicle_list.length; i++) {
+        //check if car div's brand is equal to vehicle_list's brand
+        if (vehicle_list[i].brand === brand) {
+
+            //check if vehicle div is a category of the General, then add data to vehicle details container
+            if (split[0].toLowerCase() === 'general') {
+
+                //first: reset vehicle details container values every time when click a vehicle div
+                resetVehicleDetailContainerValues('general-car-details-container', 'gn');
+
+                //get image data
+                let image_details = [vehicle_list[i].vehicleDetailList[0].image1, 'gn-car-image'];
+
+                //second: set vehicle details container values every time when click a vehicle div
+                setVehicleDetailsContainerValues('gn', image_details, vehicle_list[i].brand, vehicle_list[i].vid, vehicle_list[i].transmission_type,
+                    vehicle_list[i].fuel_type, vehicle_list[i].no_of_passenger, vehicle_list[i].daily_rate, vehicle_list[i].monthly_rate,
+                    vehicle_list[i].ldw_fee, vehicle_list[i].free_mileage, vehicle_list[i].extra_km_price, vehicle_list[i].vehicleDetailList.length);
+            }
+
+            //check if vehicle div is a category of the Premium, then add data to vehicle details container
+            if (split[0].toLowerCase() === 'premium') {
+
+                //first: reset vehicle details container values every time when click a vehicle div
+                resetVehicleDetailContainerValues('premium-car-details-container', 'pr');
+
+                //get image data
+                let image_details = [vehicle_list[i].vehicleDetailList[0].image1, 'pr-car-image'];
+
+                //second: set vehicle details container values every time when click a vehicle div
+                setVehicleDetailsContainerValues('pr', image_details, vehicle_list[i].brand, vehicle_list[i].vid, vehicle_list[i].transmission_type,
+                    vehicle_list[i].fuel_type, vehicle_list[i].no_of_passenger, vehicle_list[i].daily_rate, vehicle_list[i].monthly_rate,
+                    vehicle_list[i].ldw_fee, vehicle_list[i].free_mileage, vehicle_list[i].extra_km_price, vehicle_list[i].vehicleDetailList.length);
+            }
+
+            //check if vehicle div is a category of the Luxury, then add data to vehicle details container
+            if (split[0].toLowerCase() === 'luxury') {
+
+                //first: reset vehicle details container values every time when click a vehicle div
+                resetVehicleDetailContainerValues('luxury-car-details-container', 'lx');
+
+                //get image data
+                let image_details = [vehicle_list[i].vehicleDetailList[0].image1, 'lx-car-image'];
+
+                //second: set vehicle details container values every time when click a vehicle div
+                setVehicleDetailsContainerValues('lx', image_details, vehicle_list[i].brand, vehicle_list[i].vid, vehicle_list[i].transmission_type,
+                    vehicle_list[i].fuel_type, vehicle_list[i].no_of_passenger, vehicle_list[i].daily_rate, vehicle_list[i].monthly_rate,
+                    vehicle_list[i].ldw_fee, vehicle_list[i].free_mileage, vehicle_list[i].extra_km_price, vehicle_list[i].vehicleDetailList.length);
+            }
+        }
+    }
+}
+
+//reset vehicle detail container values
+function resetVehicleDetailContainerValues(parent, vehicle_ct) {
+    //reset pickup date
+    document.getElementById(`${vehicle_ct}-pickup-date`).valueAsDate = null;
+    //reset return date
+    document.getElementById(`${vehicle_ct}-return-date`).valueAsDate = null;
+    //disable return date
+    $(`#${vehicle_ct}-return-date`).prop("disabled", true);
+    //disable driver checkbox
+    $(`#${vehicle_ct}-driver`).prop("disabled", true);
+    //uncheck driver checkbox
+    $(`#${vehicle_ct}-driver`).prop('checked', false);
+    //disable add to cart button
+    $(`#${vehicle_ct}-btn-add-to-cart`).prop('disabled', true);
+    //reset qty
+    $(`#${vehicle_ct}-qty`).text(1);
+    //rest rental fee
+    $(`#${vehicle_ct}-rental-fee`).children('span').eq(0).text('0.00');
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------*/
 
 
 //password see change
@@ -367,7 +583,7 @@ $('#btn-reg-as-customer').click(function () {
 
 //Vehicles section
 //general vehicles loading
-let gn_car_images = ["./assets/bmwi8.jpg", "./assets/car-3.jpg", "./assets/car-4.jpg", "./assets/car-5.jpg", "./assets/bmwi8.jpg"];
+/*let gn_car_images = ["./assets/bmwi8.jpg", "./assets/car-3.jpg", "./assets/car-4.jpg", "./assets/car-5.jpg", "./assets/bmwi8.jpg"];
 $('#general-cars-category').empty();
 for (let i = 0; i < 5; i++) {
     $('#general-cars-category').append(
@@ -379,10 +595,10 @@ for (let i = 0; i < 5; i++) {
         `
     );
     $('#gn-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
-}
+}*/
 
 //premium vehicles loading
-$('#premium-cars-category').empty();
+/*$('#premium-cars-category').empty();
 for (let i = 0; i < 4; i++) {
     $('#premium-cars-category').append(
         `
@@ -413,7 +629,7 @@ for (let i = 0; i < 4; i++) {
         `
     );
     $('#pr-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
-}
+}*/
 
 //luxury vehicles loading
 /*$('#luxury-cars-category').empty();
@@ -532,7 +748,15 @@ function incrementVehicleQTY(id) {
     let parent = $(`#${id}`).closest('div').attr('id');
     let qty_id = $(`#${parent}`).children('span').eq(1).attr('id');
     let old_qty_value = parseInt($(`#${qty_id}`).text());
-    $(`#${qty_id}`).text(old_qty_value + 1);
+
+    //get left cars
+    let split = $(`#${parent}`).children('span').eq(0).text().split('Left');
+    let left_cars = parseInt(split[0]);
+
+    //increment qty if left car value is greater than old qty value
+    if (left_cars > old_qty_value) {
+        $(`#${qty_id}`).text(old_qty_value + 1);
+    }
 
     let new_qty_value = parseInt($(`#${qty_id}`).text());
 
@@ -814,8 +1038,27 @@ function setReturnDate(id) {
     }
 }
 
+//check if vehicle already in the cart or not
+function checkVehicleIsExistInCart(brand) {
+    let x = 0;
+    if ($('#cart-items-container').children().length > 0) {
+        for (let i = 0; i < $('#cart-items-container').children().length; i++) {
+            if ($('#cart-items-container').children('div').eq(i).children('p').eq(0).text().toLowerCase() === brand.toLowerCase()) {
+                x = i;
+                break;
+            }
+            x = -1;
+        }
+    } else {
+        x = -1;
+    }
+
+    return x;
+}
+
 //add vehicle to cart
 let request_details_list = [];
+
 function addVehicleToCart(id) {
     //get parent container id
     let parent = $(`#${id}`).closest('div').attr('id');
@@ -865,9 +1108,16 @@ function addVehicleToCart(id) {
 
 
         if (rental_fee !== 0) {
+            //check if cart item count is less than 3 & then add item into the cart
             if (cart_items_count < 3) {
-                $('#cart-items-container').append(
-                    `
+
+                //check if vehicle is already in the cart or not
+                let x = checkVehicleIsExistInCart(brand);
+
+                //add vehicle into the cart if it is not in the cart yet
+                if (x === -1) {
+                    $('#cart-items-container').append(
+                        `
                  <div class="item" id="item${cart_items_count + 1}">
                     <span class="btn-remove-item" id="btn-remove-item${cart_items_count + 1}" onclick="removeItemFromCart(this.id)">
                         <i class="fas fa-minus-circle"></i>
@@ -879,31 +1129,35 @@ function addVehicleToCart(id) {
                     <p class="cart-ldw-fee" id="cart-ldw-fee${cart_items_count + 1}">LDW Fee:<span>${ldw_fee}</span></p>
                 </div>
                 `
-                );
+                    );
 
-                //set cart total rental fee
-                let old_value = parseFloat($('#cart_total_rental_fee').text());
-                $('#cart_total_rental_fee').text((old_value + rental_fee) + ".00");
+                    //set cart total rental fee
+                    let old_value = parseFloat($('#cart_total_rental_fee').text());
+                    $('#cart_total_rental_fee').text((old_value + rental_fee) + ".00");
 
-                cart_items_count += 1;
+                    cart_items_count += 1;
 
-                //add booking details into array list
-                request_details_list.push({
-                    pk: {
-                        'rid': request_id,
-                        'vid': 'V001'
-                    },
-                    qty: qty,
-                    driver: driver,
-                    pickup_date: new_pickup_date.toLocaleDateString(),
-                    return_date: new_return_date.toLocaleDateString(),
-                    rental_fee: rental_fee,
-                    ldw_fee: ldw_fee
-                });
+                    //add booking details into array list
+                    request_details_list.push({
+                        pk: {
+                            'rid': request_id,
+                            'vid': ct_id
+                        },
+                        qty: qty,
+                        driver: driver,
+                        pickup_date: new_pickup_date.toLocaleDateString(),
+                        return_date: new_return_date.toLocaleDateString(),
+                        rental_fee: rental_fee,
+                        ldw_fee: ldw_fee
+                    });
+                    alert('Your vehicle is added to the cart!');
+                    $('#cart-item-count').css('display', 'flex');
+                    $('#cart-item-count').text(cart_items_count);
 
-                alert('Your vehicle is added to the cart!');
-                $('#cart-item-count').css('display', 'flex');
-                $('#cart-item-count').text(cart_items_count);
+                } else {
+                    alert('Your vehicle is already in the cart!');
+                }
+
 
                 //reset pickup date
                 document.getElementById(`${pickup_date_id}`).valueAsDate = null;
@@ -998,12 +1252,10 @@ $('#btn-proceed').click(function () {
     //get cart total rental fee
     let total_rental_fee = parseFloat($('#cart_total_rental_fee').text());
 
-
-    try {
+    if ($('#bankSlip').get(0).files.length > 0) {
         //get bank slip image
         let fileObject = $("#bankSlip")[0].files[0];//access file object from input field
-        let fileName = user_id + "-" + $("#bankSlip")[0].files[0].name; //get file name
-
+        let fileName = user_id + '-' + request_id + "-bankslip"; //get file name
 
         //add request data & request details list's data into the request_list
         request = {
@@ -1018,25 +1270,35 @@ $('#btn-proceed').click(function () {
             request_detail_list: request_details_list
         };
 
-
         $.ajax({
             url: 'http://localhost:8080/Easy_Car_Rental_Server/request',
             method: 'post',
             async: true,
             contentType: 'application/json',
+            dataType: 'json',
             data: JSON.stringify(request),
             success: function (response) {
                 uploadBankSlip(fileObject, fileName)
                 alert(response.message);
                 generateRequestID();
+                emptyCart();
             }
         });
-
-    } catch (e) {
-        alert('Upload a bank slip image!');
+    } else {
+        alert('Upload a bank slip!');
     }
+
 });
 
+//empty cart
+function emptyCart() {
+    $('#cart-items-container').children().remove();
+    cart_items_count = 0;
+    $('#cart_total_rental_fee').text('0.00');
+    $('#bankSlip').val('');
+    $('#cart-popup').css('display', 'none');
+    $('#cart-item-count').css('display', 'none');
+}
 
 //upload bank slip
 function uploadBankSlip(image, fileName) {
@@ -1058,7 +1320,6 @@ function uploadBankSlip(image, fileName) {
 
 //generate RID
 let request_id;
-
 function generateRequestID() {
     $.ajax({
         url: 'http://localhost:8080/Easy_Car_Rental_Server/request/lastrid',
@@ -1083,7 +1344,6 @@ function generateRequestID() {
         }
     });
 }
-
 generateRequestID();
 
 
