@@ -25,7 +25,7 @@ function nextBackground() {
     }
 }
 setInterval(nextBackground, 8000);*/
-let images = [];
+/*let images = [];
 let x = 0;
 
 function getImage1() {
@@ -51,20 +51,7 @@ function getImage1() {
             }
             $("#thumbnail").attr("src", "data:image/png;base64,");
 
-            /* PUT THIS INSIDE AJAX SUCCESS */
-            /*let img = $('<img id="image_id">');
-            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
-            img.appendTo('#image_div');*/
-
-            //set image's src to the div
-            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
-            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
-
             images.push('data:image/jpg;base64,' + btoa(binary));
-            /*x = x + 1;
-            if (x === images.length) {
-                x = 0;
-            }*/
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error in getting document " + textStatus);
@@ -95,20 +82,7 @@ function getImage2() {
             }
             $("#thumbnail").attr("src", "data:image/png;base64,");
 
-            /* PUT THIS INSIDE AJAX SUCCESS */
-            /*let img = $('<img id="image_id">');
-            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
-            img.appendTo('#image_div');*/
-
-            //set image's src to the div
-            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
-            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
-
             images.push('data:image/jpg;base64,' + btoa(binary));
-            /*x = x + 1;
-            if (x === images.length) {
-                x = 0;
-            }*/
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error in getting document " + textStatus);
@@ -139,20 +113,7 @@ function getImage3() {
             }
             $("#thumbnail").attr("src", "data:image/png;base64,");
 
-            /* PUT THIS INSIDE AJAX SUCCESS */
-            /*let img = $('<img id="image_id">');
-            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
-            img.appendTo('#image_div');*/
-
-            //set image's src to the div
-            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
-            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
-
             images.push('data:image/jpg;base64,' + btoa(binary));
-            /*x = x + 1;
-            if (x === images.length) {
-                x = 0;
-            }*/
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error in getting document " + textStatus);
@@ -183,20 +144,7 @@ function getImage4() {
             }
             $("#thumbnail").attr("src", "data:image/png;base64,");
 
-            /* PUT THIS INSIDE AJAX SUCCESS */
-            /*let img = $('<img id="image_id">');
-            img.attr('src', 'data:image/jpg;base64,' + btoa(binary));
-            img.appendTo('#image_div');*/
-
-            //set image's src to the div
-            /*$("#home").css("background-image", "url(" + 'data:image/jpg;base64,' + btoa(binary) + ")");*/
-            /*$('#myImage').attr('src', 'data:image/jpg;base64,' + btoa(binary));*/
-
             images.push('data:image/jpg;base64,' + btoa(binary));
-            /*x = x + 1;
-            if (x === images.length) {
-                x = 0;
-            }*/
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error in getting document " + textStatus);
@@ -216,8 +164,7 @@ function nextBackground() {
         x = 0;
     }
 }
-
-setInterval(nextBackground, 8000);
+setInterval(nextBackground, 8000);*/
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -225,7 +172,6 @@ setInterval(nextBackground, 8000);
 //-----------------------Vehicle view--------------------
 //get all vehicles
 let vehicle_list = [];
-
 function loadAllVehicles() {
     $.ajax({
         url: 'http://localhost:8080/Easy_Car_Rental_Server/vehicle',
@@ -557,6 +503,14 @@ $('#li-register').click(function () {
 //registration view enable
 $('#btnRegister').click(function () {
     registrationViewSetEnable();
+    $('#btn-reg-as-customer').css({
+        background: 'none',
+        color: 'black'
+    });
+    $('#btn-reg-as-driver').css({
+        background: 'none',
+        color: 'black'
+    });
 });
 //registration view close
 $('#btn-close-registration-view').click(function () {
@@ -564,106 +518,280 @@ $('#btn-close-registration-view').click(function () {
     $('#popup-container').css('height', '550px');
 });
 
-
-//customer registration form loading
+//registration form loading
+let user_role = 'customer';
+//btn customer click
 $('#btn-reg-as-customer').click(function () {
-    $('#popup-container').css('height', '690px');
+    $('#btn-reg-as-customer').css({
+        background: 'gray',
+        color: 'white'
+    });
+    $('#btn-reg-as-driver').css({
+        background: 'none',
+        color: 'black'
+    });
 
+    $('#popup-container').css('height', '690px');
+    loadRegistrationForm();
+    user_role = 'customer';
+});
+//btn driver click
+$('#btn-reg-as-driver').click(function () {
+    $('#btn-reg-as-driver').css({
+        background: 'gray',
+        color: 'white'
+    });
+    $('#btn-reg-as-customer').css({
+        background: 'none',
+        color: 'black'
+    });
+
+    $('#popup-container').css('height', '690px');
+    loadRegistrationForm();
+    user_role = 'driver';
+});
+
+function loadRegistrationForm() {
     $.ajax({
         method: 'GET',
         async: true,
-        url: './views/customerRegistration.html',
+        url: './views/userRegistrationForm.html',
         contentType: 'text/html',
         success: (data) => {
             $('#registration-form-container').html(data);
         }
     });
+}
+
+
+//register user
+//register customer
+$('.right-side').on('click', '#reg-btn-user', function () {
+    let user_name = $('#txtRegName').val();
+    let user_address = $('#txtRegAddress').val();
+    let user_email = $('#txtRegEmail').val();
+    let user_nic = $('#txtRegNic').val();
+    let user_dr_license = $('#txtRegLicense').val();
+    let user_contact = $('#txtRegContact').val();
+    let user_password = $('#reg-password').val();
+
+    if ($('#uploadNicImage').get(0).files.length > 0 && $('#uploadLicenseImage').get(0).files.length > 0) {
+        //check if user is a customer or driver & then add user
+        if (user_role === 'customer') {
+            //get customer nic image
+            let customer_nic_image = $("#uploadNicImage")[0].files[0];
+            let customer_nic_image_name = generated_user_id + '-' + generated_customer_id + "-nic_image";
+
+            //get customer driving license image
+            let customer_dr_license_image = $("#uploadLicenseImage")[0].files[0];
+            let customer_dr_license_image_name = generated_user_id + '-' + generated_customer_id + "-dr_license_image";
+
+            //add customer
+            let customer_object = {
+                id: generated_customer_id,
+                user: {
+                    uid: generated_user_id,
+                    email: user_email,
+                    password: user_password,
+                    role: user_role
+                },
+                name: user_name,
+                address: user_address,
+                nic: user_nic,
+                nic_image: customer_nic_image_name,
+                dr_license: user_dr_license,
+                dr_license_image: customer_dr_license_image_name,
+                contact: user_contact
+            }
+            addUser(user_role, customer_object, customer_nic_image, customer_nic_image_name, customer_dr_license_image, customer_dr_license_image_name);
+
+        } else if (user_role === 'driver') {
+            //get driver nic image
+            let driver_nic_image = $("#uploadNicImage")[0].files[0];
+            let driver_nic_image_name = generated_user_id + '-' + generated_driver_id + "-nic_image";
+
+            //get driver driving license image
+            let driver_dr_license_image = $("#uploadLicenseImage")[0].files[0];
+            let driver_dr_license_image_name = generated_user_id + '-' + generated_driver_id + "-dr_license_image";
+
+            //add driver
+            let driver_object = {
+                did: generated_driver_id,
+                user: {
+                    uid: generated_user_id,
+                    email: user_email,
+                    password: user_password,
+                    role: user_role
+                },
+                name: user_name,
+                address: user_address,
+                nic: user_nic,
+                nic_image: driver_nic_image_name,
+                dr_license: user_dr_license,
+                dr_license_image: driver_dr_license_image_name,
+                contact: user_contact,
+                availability: "Available"
+            }
+            addUser(user_role, driver_object, driver_nic_image, driver_nic_image_name, driver_dr_license_image, driver_dr_license_image_name);
+            /*//upload driver nic image
+            uploadUserNicAndLicenseImage(user_role+'/upload_image', driver_nic_image, driver_nic_image_name);
+            //upload driver driving license image
+            uploadUserNicAndLicenseImage(user_role+'/upload_image', driver_dr_license_image, driver_dr_license_image_name);*/
+        }
+
+    } else {
+        alert('Upload NIC & Driving License images');
+    }
 });
 
+//add user
+function addUser(user_role, obj, user_nic_image, user_nic_image_name, user_dr_license_image, user_dr_license_image_name) {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/login/' + user_role,
+        method: 'post',
+        async: true,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(obj),
+        success: function (response) {
+            alert(response.message);
 
-//Vehicles section
-//general vehicles loading
-/*let gn_car_images = ["./assets/bmwi8.jpg", "./assets/car-3.jpg", "./assets/car-4.jpg", "./assets/car-5.jpg", "./assets/bmwi8.jpg"];
-$('#general-cars-category').empty();
-for (let i = 0; i < 5; i++) {
-    $('#general-cars-category').append(
-        `
-        <div id="general-car${i + 1}">
-            <div class="image" id="gn-image${i + 1}"></div>
-            <p class="brand" id="gn-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-        </div>
-        `
-    );
-    $('#gn-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
-}*/
+            //upload user nic image
+            uploadUserNicAndLicenseImage(user_role + '/upload_image', user_nic_image, user_nic_image_name);
+            //upload user driving license image
+            uploadUserNicAndLicenseImage(user_role + '/upload_image', user_dr_license_image, user_dr_license_image_name);
 
-//premium vehicles loading
-/*$('#premium-cars-category').empty();
-for (let i = 0; i < 4; i++) {
-    $('#premium-cars-category').append(
-        `
-        <div id="premium-car${i + 1}">
-            <div class="image" id="pr-image${i + 1}"></div>
-           <p class="brand" id="pr-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-         <!--    <p class="category-id" id="pr-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
-            <p class="transmission-type" id="pr-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
-            <p class="fuel-type" id="pr-fuel-type${i + 1}">Fuel: Diesel</p>
-            <p class="no-of-passenger" id="pr-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
-            <p class="daily-rate" id="pr-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
-            <p class="monthly-rate" id="pr-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
-            <p class="free-mileage-price" id="pr-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
-            <p class="extra-km-price" id="pr-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
-            <div class="color" id="pr-color${i + 1}">
-                <span>Color:</span>
-                <span class="white" id="pr-white${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="black" id="pr-black${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="red" id="pr-red${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="blue" id="pr-blue${i + 1}"><i class="fas fa-circle"></i></span>
-            </div>
-            <span class="left-cars" id="pr-left-cars${i + 1}">20 Left</span>
-            <button class="btn-increment" id="pr-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-            <span class="count" id="pr-count${i + 1}">0</span>
-            <button class="btn-decrement" id="pr-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-            <button class="btn-add-to-cart" id="pr-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i class="fas fa-cart-plus"></i></button> -->
-        </div>
-        `
-    );
-    $('#pr-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
-}*/
+            generateUserId();
+            generateCustomerId();
+            generateDriverId();
+            resetRegistrationFormDetails();
 
-//luxury vehicles loading
-/*$('#luxury-cars-category').empty();
-for (let i = 0; i < 3; i++) {
-    $('#luxury-cars-category').append(
-        `
-        <div id="luxury-car${i + 1}">
-            <div class="image" id="lx-image${i + 1}"></div>
-             <p class="brand" id="lx-brand${i + 1}">Perodua Bezza Prime Sedan - Auto (2017)</p>
-        <!--    <p class="category-id" id="lx-category-id${i + 1}">CT-ID:<span>ABSD2154KL</span></p>
-            <p class="transmission-type" id="lx-transmission-type${i + 1}">Transmission:<span>Auto</span></p>
-            <p class="fuel-type" id="lx-fuel-type${i + 1}">Fuel:<span>Diesel</span></p>
-            <p class="no-of-passenger" id="lx-no-of-passenger${i + 1}">No.Passenger:<span>5</span></p>
-            <p class="daily-rate" id="lx-daily-rate${i + 1}">Daily Rate:<span>5000.00</span></p>
-            <p class="monthly-rate" id="lx-monthly-rate${i + 1}">Monthly Rate:<span>5000.00</span></p>
-            <p class="free-mileage-price" id="lx-free-mileage-price${i + 1}">Free Mileage:<span>5KM</span></p>
-            <p class="extra-km-price" id="lx-extra-km-price${i + 1}">Extra KM:<span>1000.00 per 1KM</span></p>
-            <div class="color" id="lx-color${i + 1}">
-                <span>Color:</span>
-                <span class="white" id="lx-white${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="black" id="lx-black${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="red" id="lx-red${i + 1}"><i class="fas fa-circle"></i></span>
-                <span class="blue" id="lx-blue${i + 1}"><i class="fas fa-circle"></i></span>
-            </div>
-            <span class="left-cars" id="lx-left-cars${i + 1}">20 Left</span>
-            <button class="btn-increment" id="lx-btn-increment${i + 1}"><i class="far fa-plus-square"></i></button>
-            <span class="count" id="lx-count${i + 1}">0</span>
-            <button class="btn-decrement" id="lx-btn-decrement${i + 1}"><i class="far fa-minus-square"></i></button>
-            <button class="btn-add-to-cart" id="lx-btn-add-to-cart${i + 1}" onclick="addItemToCart(this.id)"><i class="fas fa-cart-plus"></i></button> -->
-        </div>
-        `
-    );
-    $('#lx-image' + (i + 1)).css('background-image', 'url("' + gn_car_images[i] + '")');
-}*/
+            //close registration view
+            $('#registration-popup').css("display", "none");
+            $('#popup-container').css('height', '550px');
+        }
+    });
+}
+
+//reset registration form details
+function resetRegistrationFormDetails() {
+    $('#txtRegName').val('');
+    $('#txtRegAddress').val('');
+    $('#txtRegEmail').val('');
+    $('#txtRegNic').val('');
+    $('#uploadNicImage').val('');
+    $('#txtRegLicense').val('');
+    $('#uploadLicenseImage').val('');
+    $('#txtRegContact').val('');
+    $('#reg-password').val('');
+}
+
+//upload user nic image & driving license image
+function uploadUserNicAndLicenseImage(path, image, fileName) {
+    let image_file = new FormData();
+    image_file.append("image", image, fileName);
+
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/' + path,
+        method: 'post',
+        async: true,
+        processData: false,
+        contentType: false,
+        data: image_file,
+        success: function (response) {
+        }
+    });
+}
+
+//generate user id
+let generated_user_id;
+
+function generateUserId() {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/login/lastid',
+        method: 'get',
+        async: true,
+        dataType: 'json',
+        success: function (response) {
+            try {
+                let last_uid = response.data;
+                let newId = parseInt(last_uid.substring(1, 4)) + 1;
+                if (newId < 10) {
+                    generated_user_id = "U00" + newId;
+                } else if (newId < 100) {
+                    generated_user_id = "U0" + newId;
+                } else {
+                    generated_user_id = "U" + newId;
+                }
+
+            } catch (e) {
+                generated_user_id = "U001";
+            }
+        }
+    });
+}
+
+generateUserId();
+
+//generate customer id
+let generated_customer_id;
+
+function generateCustomerId() {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/customer/lastid',
+        method: 'get',
+        async: true,
+        dataType: 'json',
+        success: function (response) {
+            try {
+                let last_cid = response.data;
+                let newId = parseInt(last_cid.substring(1, 4)) + 1;
+                if (newId < 10) {
+                    generated_customer_id = "C00" + newId;
+                } else if (newId < 100) {
+                    generated_customer_id = "C0" + newId;
+                } else {
+                    generated_customer_id = "C" + newId;
+                }
+
+            } catch (e) {
+                generated_customer_id = "C001";
+            }
+        }
+    });
+}
+
+generateCustomerId();
+
+//generate driver id
+let generated_driver_id;
+
+function generateDriverId() {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/driver/lastid',
+        method: 'get',
+        async: true,
+        dataType: 'json',
+        success: function (response) {
+            try {
+                let last_did = response.data;
+                let newId = parseInt(last_did.substring(1, 4)) + 1;
+                if (newId < 10) {
+                    generated_driver_id = "D00" + newId;
+                } else if (newId < 100) {
+                    generated_driver_id = "D0" + newId;
+                } else {
+                    generated_driver_id = "D" + newId;
+                }
+
+            } catch (e) {
+                generated_driver_id = "D001";
+            }
+        }
+    });
+}
+
+generateDriverId();
 
 
 //Notification, Cart, Profile popup views open & close
@@ -709,6 +837,7 @@ $("#profile-popup").click(function (e) {
 
 //remove item form cart
 let cart_items_count = 0;
+
 function removeItemFromCart(id) {
     //get parent id
     let parent_item = $(`#${id}`).closest('div').attr('id');
@@ -739,6 +868,9 @@ function removeItemFromCart(id) {
 function removeNotification(id) {
     let parent_item = $(`#${id}`).closest('div').attr('id');
     $(`#${parent_item}`).remove();
+
+    let old_count = $('#notification-item-count').text();
+    $('#notification-item-count').text(old_count - 1);
 }
 
 
@@ -1247,7 +1379,7 @@ $('#btn-proceed').click(function () {
     let count = $("#cart-items-container").children().length;
 
     //get user id;
-    let user_id = $('#user-id').text();
+    let customer_id = $('#user-id').text();
 
     //get cart total rental fee
     let total_rental_fee = parseFloat($('#cart_total_rental_fee').text());
@@ -1255,13 +1387,13 @@ $('#btn-proceed').click(function () {
     if ($('#bankSlip').get(0).files.length > 0) {
         //get bank slip image
         let fileObject = $("#bankSlip")[0].files[0];//access file object from input field
-        let fileName = user_id + '-' + request_id + "-bankslip"; //get file name
+        let fileName = customer_id + '-' + request_id + "-bankslip"; //get file name
 
         //add request data & request details list's data into the request_list
         request = {
             rid: request_id,
             customer: {
-                id: user_id
+                id: customer_id
             },
             total_fee: total_rental_fee,
             bank_slip: fileName,
@@ -1282,6 +1414,7 @@ $('#btn-proceed').click(function () {
                 alert(response.message);
                 generateRequestID();
                 emptyCart();
+                getNotifications($('#user-id').text());
             }
         });
     } else {
@@ -1318,8 +1451,45 @@ function uploadBankSlip(image, fileName) {
 }
 
 
+//get request notifications
+function getNotifications(cid) {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/request/get_request',
+        method: 'get',
+        async: true,
+        dataType: 'json',
+        data: {
+            cid: cid
+        },
+        success: function (response) {
+            let notification_list = response.data;
+            $('#notification-content-container').empty();
+            for (let i = 0; i < notification_list.length; i++) {
+                $('#notification-item-count').css('display', 'flex');
+                $('#notification-content-container').append(
+                    `
+                <div class="notification" id="notification${i}">
+                    <span class="btn-remove-notification" id="btn-remove-notification${i}" onclick="removeNotification(this.id)">
+                        <i class="fas fa-minus-circle"></i>
+                    </span>
+                    <p id="notification-message"><span>${notification_list[i].message}</span></p>
+                    <p id="notifiocation-rid">RID:<span>${notification_list[i].rid}</span></p>
+                    <p id="notification-rental-fee">Rental Fee:<span>${notification_list[i].total_fee}</span></p>
+                </div>  
+                `
+                );
+                $('#notification-item-count').text(i + 1);
+            }
+        }
+    });
+}
+
+getNotifications($('#user-id').text());
+
+
 //generate RID
 let request_id;
+
 function generateRequestID() {
     $.ajax({
         url: 'http://localhost:8080/Easy_Car_Rental_Server/request/lastrid',
@@ -1344,6 +1514,7 @@ function generateRequestID() {
         }
     });
 }
+
 generateRequestID();
 
 

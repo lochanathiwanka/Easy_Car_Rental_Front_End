@@ -28,7 +28,10 @@
             <li><a href="#registration-popup" id="li-register">Register</a></li>
         </ul>
         <ul class="menu3">
-            <li id="notification"><i class="fas fa-bell"></i></li>
+            <li class="notification" id="notification">
+                <i class="fas fa-bell"></i>
+                <span class="notification-item-count" id="notification-item-count">0</span>
+            </li>
             <li class="cart" id="cart">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-item-count" id="cart-item-count">0</span>
@@ -38,13 +41,15 @@
     </nav>
     <div class="notification-popup" id="notification-popup">
         <div class="notification-popup-container" id="notification-popup-container">
-            <div class="content">
-                <div class="notification" id="notification1">
+            <div class="content" id="notification-content-container">
+                <!--<div class="notification" id="notification1">
                     <span class="btn-remove-notification" id="btn-remove-notification1"
                           onclick="removeNotification(this.id)">
                         <i class="fas fa-minus-circle"></i>
                     </span>
-                    <p><span>Your request is being processed. Thanks for connect with us!</span></p>
+                    <p id="notification-message"><span>Your request is being processed. Thanks for connect with us!</span></p>
+                    <p id="notifiocation-rid">RID:<span>R001</span></p>
+                    <p id="notification-rental-fee">Rental Fee:<span>10000.00</span></p>
                 </div>
                 <div class="notification" id="notification2">
                     <span class="btn-remove-notification" id="btn-remove-notification2"
@@ -52,7 +57,7 @@
                         <i class="fas fa-minus-circle"></i>
                     </span>
                     <p><span>Your request is being processed. Thanks for connect with us!</span></p>
-                </div>
+                </div>-->
             </div>
             <div class="footer"></div>
         </div>

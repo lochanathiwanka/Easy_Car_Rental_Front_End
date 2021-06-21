@@ -103,7 +103,7 @@ header > nav.sticky > .menu3 > li > i:hover {
     transition: all 0.3s ease-in-out;
 }
 
-header > nav > .menu3 > .cart > .cart-item-count {
+header > nav > .menu3 > .notification > .notification-item-count {
     position: absolute;
     font-size: 15px;
     display: none;
@@ -116,6 +116,22 @@ header > nav > .menu3 > .cart > .cart-item-count {
     background-color: #D01110;
 }
 
+header > nav.sticky > .menu3 > .notification > .notification-item-count {
+    color: white;
+}
+
+header > nav > .menu3 > .cart > .cart-item-count {
+    position: absolute;
+    font-size: 15px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: -5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 30px;
+    background-color: #D01110;
+}
 header > nav.sticky > .menu3 > .cart > .cart-item-count {
     color: white;
 }
@@ -163,13 +179,14 @@ header > .notification-popup {
 header > .notification-popup > .notification-popup-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 280px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     left: 0;
     right: 0;
     margin: auto;
+    overflow: auto;
 }
 
 header > .notification-popup > .notification-popup-container > div {
@@ -186,7 +203,7 @@ header > .notification-popup > .notification-popup-container > div {
 header > .notification-popup > .notification-popup-container > .content > div {
     position: relative;
     width: 95%;
-    height: 80px;
+    min-height: 120px;
     background-color: #dbdbdb;
     left: 0;
     right: 0;
@@ -196,13 +213,23 @@ header > .notification-popup > .notification-popup-container > .content > div {
 
 header > .notification-popup > .notification-popup-container > .content > div > p {
     position: absolute;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+}
+
+header > .notification-popup > .notification-popup-container > .content > div > #notification-message {
+    top: 20px;
+}
+
+header > .notification-popup > .notification-popup-container > .content > div > #notifiocation-rid {
+    top: 65px;
+}
+
+header > .notification-popup > .notification-popup-container > .content > div > #notification-rental-fee {
+    top: 95px;
 }
 
 header > .notification-popup > .notification-popup-container > .content > div > .btn-remove-notification {
@@ -228,8 +255,8 @@ header > .cart-popup {
     display: none;
     z-index: 2;
     width: 350px;
-    height: 450px;
-    overflow-x: auto;
+    /*height: 450px;*/
+    min-height: 150px;
     right: 150px;
     top: 55px;
     border-radius: 4px;
@@ -240,7 +267,10 @@ header > .cart-popup {
 header > .cart-popup > .cart-popup-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
+    height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -753,7 +783,14 @@ main {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+    transition: all 0.3s ease-in-out;
 }
+
+/*.login > .registration-popup > .popup-container > .right-side > div > button:hover {
+    background: gray;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}*/
 
 .login > .registration-popup > .popup-container > .right-side > div > h3 {
     position: absolute;
@@ -815,35 +852,35 @@ main {
     border: 3px solid #a3b5c1;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-name-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-name-container {
     top: 0;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-address-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-address-container {
     top: 65px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-email-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-email-container {
     top: 130px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-nic-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-nic-container {
     top: 195px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-nic-container > input {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-nic-container > input {
     width: 45%;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-license-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-license-container {
     top: 260px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-license-container > input {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-license-container > input {
     width: 45%;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-nic-container > div {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-nic-container > div {
     position: absolute;
     width: 45%;
     height: 100%;
@@ -851,7 +888,7 @@ main {
     right: 20px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-nic-container > div > .reg-nic-image {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-nic-container > div > .reg-nic-image {
     position: absolute;
     width: 100%;
     height: 30px;
@@ -864,7 +901,7 @@ main {
     cursor: pointer;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-license-container > div {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-license-container > div {
     position: absolute;
     width: 45%;
     height: 100%;
@@ -872,7 +909,7 @@ main {
     right: 20px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-license-container > div > .reg-license-image {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-license-container > div > .reg-license-image {
     position: absolute;
     width: 100%;
     height: 30px;
@@ -885,11 +922,11 @@ main {
     cursor: pointer;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-contact-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-contact-container {
     top: 325px;
 }
 
-.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-customer-password-container {
+.login > .registration-popup > .popup-container > .right-side > .registration-form-container > form > .reg-user-password-container {
     top: 390px;
 }
 
