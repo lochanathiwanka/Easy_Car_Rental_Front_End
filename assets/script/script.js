@@ -31,7 +31,7 @@ let x = 0;
 function getImage1() {
     $.ajax({
         type: "GET",
-        url: `https://i.ibb.co/6gG9W4K/car1.jpg`,
+        url: `https://i.ibb.co/SQdxKSF/car2.jpg`,
         beforeSend: function (xhr) {
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
         },
@@ -51,14 +51,19 @@ function getImage1() {
             }
             $("#thumbnail").attr("src", "data:image/png;base64,");
 
-            images.push('data:image/jpg;base64,' + btoa(binary));
+            /*images.push('data:image/jpg;base64,' + btoa(binary));*/
+            let image_source = 'data:image/jpg;base64,' + btoa(binary);
+            $("#home").css("background-image", "url(" + image_source + ")");
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error in getting document " + textStatus);
         }
     });
 }
-function getImage2() {
+
+getImage1();
+
+/*function getImage2() {
     $.ajax({
         type: "GET",
         url: `https://i.ibb.co/SQdxKSF/car2.jpg`,
@@ -147,13 +152,11 @@ function getImage4() {
             alert("Error in getting document " + textStatus);
         }
     });
-}
+}*/
 
-getImage1();
-getImage2();
+/*getImage2();
 getImage3();
 getImage4();
-
 function nextBackground() {
     $("#home").css("background-image", "url(" + images[x] + ")");
     x = x + 1;
@@ -161,8 +164,7 @@ function nextBackground() {
         x = 0;
     }
 }
-
-setInterval(nextBackground, 8000);
+setInterval(nextBackground, 8000);*/
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -581,7 +583,82 @@ $('.right-side').on('click', '#reg-btn-user', function () {
     let user_contact = $('#txtRegContact').val();
     let user_password = $('#reg-password').val();
 
-    if ($('#uploadNicImage').get(0).files.length > 0 && $('#uploadLicenseImage').get(0).files.length > 0) {
+
+    let user_name_input = $('#txtRegName')[0];
+    let user_address_input = $('#txtRegAddress')[0];
+    let user_email_input = $('#txtRegEmail')[0];
+    let user_nic_input = $('#txtRegNic')[0];
+    let user_nic_image_input = $('#uploadNicImage')[0];
+    let user_dr_license_input = $('#txtRegLicense')[0];
+    let user_dr_license_image_input = $('#uploadLicenseImage')[0];
+    let user_contact_input = $('#txtRegContact')[0];
+    let user_password_input = $('#reg-password')[0];
+
+
+    if (input_validation(user_name_input) && input_validation(user_address_input) && input_validation(user_email_input) && input_validation(user_nic_input)
+        && input_validation(user_dr_license_input) && input_validation(user_contact_input) && input_validation(user_password_input) && input_validation(user_nic_image_input)
+        && input_validation(user_dr_license_image_input)) {
+        //check if user is a customer or driver & then add user
+        if (user_role === 'customer') {
+            //get customer nic image
+            let customer_nic_image = $("#uploadNicImage")[0].files[0];
+            let customer_nic_image_name = generated_user_id + '-' + generated_customer_id + "-nic_image";
+
+            //get customer driving license image
+            let customer_dr_license_image = $("#uploadLicenseImage")[0].files[0];
+            let customer_dr_license_image_name = generated_user_id + '-' + generated_customer_id + "-dr_license_image";
+
+            //add customer
+            let customer_object = {
+                id: generated_customer_id,
+                user: {
+                    uid: generated_user_id,
+                    email: user_email,
+                    password: user_password,
+                    role: user_role
+                },
+                name: user_name,
+                address: user_address,
+                nic: user_nic,
+                nic_image: customer_nic_image_name,
+                dr_license: user_dr_license,
+                dr_license_image: customer_dr_license_image_name,
+                contact: user_contact
+            }
+            addUser(user_role, customer_object, customer_nic_image, customer_nic_image_name, customer_dr_license_image, customer_dr_license_image_name);
+
+        } else if (user_role === 'driver') {
+            //get driver nic image
+            let driver_nic_image = $("#uploadNicImage")[0].files[0];
+            let driver_nic_image_name = generated_user_id + '-' + generated_driver_id + "-nic_image";
+
+            //get driver driving license image
+            let driver_dr_license_image = $("#uploadLicenseImage")[0].files[0];
+            let driver_dr_license_image_name = generated_user_id + '-' + generated_driver_id + "-dr_license_image";
+
+            //add driver
+            let driver_object = {
+                did: generated_driver_id,
+                user: {
+                    uid: generated_user_id,
+                    email: user_email,
+                    password: user_password,
+                    role: user_role
+                },
+                name: user_name,
+                address: user_address,
+                nic: user_nic,
+                nic_image: driver_nic_image_name,
+                dr_license: user_dr_license,
+                dr_license_image: driver_dr_license_image_name,
+                contact: user_contact,
+                availability: "Available"
+            }
+            addUser(user_role, driver_object, driver_nic_image, driver_nic_image_name, driver_dr_license_image, driver_dr_license_image_name);
+        }
+    }
+
+    /*if ($('#uploadNicImage').get(0).files.length > 0 && $('#uploadLicenseImage').get(0).files.length > 0) {
         //check if user is a customer or driver & then add user
         if (user_role === 'customer') {
             //get customer nic image
@@ -643,7 +720,7 @@ $('.right-side').on('click', '#reg-btn-user', function () {
 
     } else {
         alert('Upload NIC & Driving License images');
-    }
+    }*/
 });
 
 //add user
@@ -1566,3 +1643,24 @@ $('#btn-sign-in').click(function () {
         }
     });
 });
+
+
+//input validation
+function input_validation(value) {
+    let input = value;
+    const validityState = input.validity;
+
+    if (validityState.valueMissing) {
+        input.setCustomValidity('You gotta fill this out, yo!');
+        input.reportValidity();
+        return false;
+    } else if (validityState.patternMismatch) {
+        input.setCustomValidity('Regex error');
+        input.reportValidity();
+        return false;
+    } else {
+        input.setCustomValidity('');
+        input.reportValidity();
+        return true;
+    }
+}
