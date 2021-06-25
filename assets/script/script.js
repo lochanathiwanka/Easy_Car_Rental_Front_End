@@ -25,7 +25,7 @@ function nextBackground() {
     }
 }
 setInterval(nextBackground, 8000);*/
-/*let images = [];
+let images = [];
 let x = 0;
 
 function getImage1() {
@@ -58,7 +58,6 @@ function getImage1() {
         }
     });
 }
-
 function getImage2() {
     $.ajax({
         type: "GET",
@@ -89,7 +88,6 @@ function getImage2() {
         }
     });
 }
-
 function getImage3() {
     $.ajax({
         type: "GET",
@@ -120,7 +118,6 @@ function getImage3() {
         }
     });
 }
-
 function getImage4() {
     $.ajax({
         type: "GET",
@@ -164,17 +161,19 @@ function nextBackground() {
         x = 0;
     }
 }
-setInterval(nextBackground, 8000);*/
+
+setInterval(nextBackground, 8000);
 
 /*------------------------------------------------------------------------------------------*/
 
 //Vehicles section
 //-----------------------Vehicle view--------------------
+
 //get all vehicles
 let vehicle_list = [];
 function loadAllVehicles() {
     $.ajax({
-        url: 'http://localhost:8080/Easy_Car_Rental_Server/vehicle',
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/vehicle/available_vehicles',
         method: 'get',
         async: true,
         dataType: "json",
@@ -184,44 +183,50 @@ function loadAllVehicles() {
             for (let i = 0; i < vehicle_list.length; i++) {
                 //load general cars
                 if (vehicle_list[i].type.toLowerCase() === 'general') {
-                    $('#general-cars-category').append(
-                        `
+                    if (vehicle_list[i].vehicleDetailList.length > 0) {
+                        $('#general-cars-category').append(
+                            `
                         <div id="general-car${i}" onclick="carDivOnClick(this.id)">
                             <div class="image" id="gn-image${i}"></div>
                             <p class="brand" id="general-brand${i}">${vehicle_list[i].brand}</p>
                         </div>
                         `
-                    );
-                    //load general car's images
-                    setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'gn-image', (i));
+                        );
+                        //load general car's images
+                        setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'gn-image', (i));
+                    }
                 }
 
                 //load luxury cars
                 if (vehicle_list[i].type.toLowerCase() === 'premium') {
-                    $('#premium-cars-category').append(
-                        `
+                    if (vehicle_list[i].vehicleDetailList.length > 0) {
+                        $('#premium-cars-category').append(
+                            `
                         <div id="premium-car${i}" onclick="carDivOnClick(this.id)">
                             <div class="image" id="pr-image${i}"></div>
                             <p class="brand" id="premium-brand${i}">${vehicle_list[i].brand}</p>
                         </div>
                         `
-                    );
-                    //load premium car's images
-                    setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'pr-image', (i));
+                        );
+                        //load premium car's images
+                        setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'pr-image', (i));
+                    }
                 }
 
                 //load luxury cars
                 if (vehicle_list[i].type.toLowerCase() === 'luxury') {
-                    $('#luxury-cars-category').append(
-                        `
+                    if (vehicle_list[i].vehicleDetailList.length > 0) {
+                        $('#luxury-cars-category').append(
+                            `
                         <div id="luxury-car${i}" onclick="carDivOnClick(this.id)">
                             <div class="image" id="lx-image${i}"></div>
                             <p class="brand" id="luxury-brand${i}">${vehicle_list[i].brand}</p>
                         </div>
                         `
-                    );
-                    //load luxury car's images
-                    setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'lx-image', (i));
+                        );
+                        //load luxury car's images
+                        setVehicleImage(vehicle_list[i].vehicleDetailList[0].image1, 'lx-image', (i));
+                    }
                 }
             }
 
@@ -290,10 +295,11 @@ function loadAllVehicles() {
                 $('#luxury-cars-category').css('display', 'none');
                 $('#luxury-car-details-container').css('display', 'none');
             }
+
+            console.log(response.data);
         }
     });
 }
-
 loadAllVehicles();
 
 //get vehicle's image from the server and set it to vehicle div
@@ -633,10 +639,6 @@ $('.right-side').on('click', '#reg-btn-user', function () {
                 availability: "Available"
             }
             addUser(user_role, driver_object, driver_nic_image, driver_nic_image_name, driver_dr_license_image, driver_dr_license_image_name);
-            /*//upload driver nic image
-            uploadUserNicAndLicenseImage(user_role+'/upload_image', driver_nic_image, driver_nic_image_name);
-            //upload driver driving license image
-            uploadUserNicAndLicenseImage(user_role+'/upload_image', driver_dr_license_image, driver_dr_license_image_name);*/
         }
 
     } else {
@@ -1190,7 +1192,6 @@ function checkVehicleIsExistInCart(brand) {
 
 //add vehicle to cart
 let request_details_list = [];
-
 function addVehicleToCart(id) {
     //get parent container id
     let parent = $(`#${id}`).closest('div').attr('id');
@@ -1280,7 +1281,9 @@ function addVehicleToCart(id) {
                         pickup_date: new_pickup_date.toLocaleDateString(),
                         return_date: new_return_date.toLocaleDateString(),
                         rental_fee: rental_fee,
-                        ldw_fee: ldw_fee
+                        ldw_fee: ldw_fee,
+                        message: 'Your request is being processed. Thanks for connecting with us!',
+                        status: 'show',
                     });
                     alert('Your vehicle is added to the cart!');
                     $('#cart-item-count').css('display', 'flex');
@@ -1316,15 +1319,16 @@ function addVehicleToCart(id) {
         }
 
     } else {
+        alert('You should be logged in to buy vehicles');
         //jump to Login page
-        document.getElementById("jump_to_this_location").scrollIntoView({behavior: 'auto'});
+        document.getElementById("login").scrollIntoView({behavior: 'auto'});
     }
 }
 
 //check if the user is logged in or not
 function checkIsUserLogged() {
     let user_name = $('#user-name').text();
-    if (user_name.trim().length > 0) {
+    if (user_name.length > 0) {
         return true;
     } else {
         return false;
@@ -1397,8 +1401,6 @@ $('#btn-proceed').click(function () {
             },
             total_fee: total_rental_fee,
             bank_slip: fileName,
-            message: 'Your request is being processed. Thanks for connecting with us!',
-            status: 'show',
             request_detail_list: request_details_list
         };
 
@@ -1465,31 +1467,31 @@ function getNotifications(cid) {
             let notification_list = response.data;
             $('#notification-content-container').empty();
             for (let i = 0; i < notification_list.length; i++) {
-                $('#notification-item-count').css('display', 'flex');
-                $('#notification-content-container').append(
-                    `
-                <div class="notification" id="notification${i}">
-                    <span class="btn-remove-notification" id="btn-remove-notification${i}" onclick="removeNotification(this.id)">
-                        <i class="fas fa-minus-circle"></i>
-                    </span>
-                    <p id="notification-message"><span>${notification_list[i].message}</span></p>
-                    <p id="notifiocation-rid">RID:<span>${notification_list[i].rid}</span></p>
-                    <p id="notification-rental-fee">Rental Fee:<span>${notification_list[i].total_fee}</span></p>
-                </div>  
-                `
-                );
-                $('#notification-item-count').text(i + 1);
+                for (let j = 0; j < notification_list[i].request_detail_list.length; j++) {
+                    $('#notification-item-count').css('display', 'flex');
+                    $('#notification-content-container').append(
+                        `
+                        <div class="notification" id="notification${j}">
+                            <span class="btn-remove-notification" id="btn-remove-notification${j}" onclick="removeNotification(this.id)">
+                                <i class="fas fa-minus-circle"></i>
+                            </span>
+                            <p id="notification-message"><span>${notification_list[i].request_detail_list[j].message}</span></p>
+                            <p id="notifiocation-rid">RID:<span>${notification_list[i].rid}</span></p>
+                            <p id="notification-rental-fee">Rental Fee:<span>${notification_list[i].request_detail_list[j].rental_fee}</span></p>
+                        </div>  
+                        `
+                    );
+                    $('#notification-item-count').text(j + 1);
+                }
             }
         }
     });
 }
-
 getNotifications($('#user-id').text());
 
 
 //generate RID
 let request_id;
-
 function generateRequestID() {
     $.ajax({
         url: 'http://localhost:8080/Easy_Car_Rental_Server/request/lastrid',
@@ -1514,32 +1516,53 @@ function generateRequestID() {
         }
     });
 }
-
 generateRequestID();
 
-
+// sign in button click
 $('#btn-sign-in').click(function () {
     //get email
     let email = $('#txtEmail').val();
     //get password
     let password = $('#password').val();
 
-    window.location.replace('https://lochanathiwanka.github.io/Easy_Car_Rental_Admin_Dashboard/');
-
-
-    /*    $.ajax({
-            url: 'http://localhost:8080/Easy_Car_Rental_Server/login',
-            method: 'get',
-            async: true,
-            data: {
-                email: email,
-                password: password
-            },
-            dataType: 'json',
-            success: function (response) {
+    $.ajax({
+        url: 'http://localhost:8080/Easy_Car_Rental_Server/login',
+        method: 'get',
+        async: true,
+        data: {
+            email: email,
+            password: password
+        },
+        dataType: 'json',
+        success: function (response) {
+            try {
                 if (response.data.role === 'admin') {
                     window.location.replace('https://lochanathiwanka.github.io/Easy_Car_Rental_Admin_Dashboard/');
+                } else if (response.data.role === 'customer') {
+
+                    //get customer data
+                    $.ajax({
+                        url: 'http://localhost:8080/Easy_Car_Rental_Server/customer/' + response.data.uid,
+                        method: 'get',
+                        dataType: 'json',
+                        success: function (response2) {
+                            //set user profile details
+                            $('#user-name').text(response2.data.name);
+                            $('#user-email').text(response.data.email);
+                            $('#user-id').text(response2.data.id);
+
+                            //clear email & password fields
+                            $('#txtEmail').val('');
+                            $('#password').val('');
+
+                            //get notifications
+                            getNotifications(response2.data.id);
+                        }
+                    });
                 }
+            } catch (e) {
+                alert('User not found!');
             }
-        });*/
+        }
+    });
 });
