@@ -474,11 +474,14 @@ function resetVehicleDetailContainerValues(parent, vehicle_ct) {
 //password see change
 let condition = false;
 $('#password-logo').click(function () {
+    let x = document.getElementById("password");
     if (!condition) {
         $(this).attr('class', 'far fa-eye');
+        x.type = "text";
         condition = true;
     } else {
         $(this).attr('class', 'far fa-eye-slash');
+        x.type = "password";
         condition = false;
     }
 });
